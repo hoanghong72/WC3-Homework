@@ -1,0 +1,15 @@
+{
+    "lastName": "Tran",
+    "firstName": "Lam",
+    "userNumber": "0794202506",
+    "gender": "Female",
+    "dob_day": "16",
+    "dob_month": "June",
+    "dob_year": "2001",
+    "subjects" : ["Computer Science", "English"],
+    "hobbies" : ["Reading", "Sports", "Music"],
+    "picture" : "cypress/assests/img/img_file.png",
+    "currentAddress" : "Tan Phu",
+    "state" : "NCR",
+    "city" : "Delhi"
+  }
