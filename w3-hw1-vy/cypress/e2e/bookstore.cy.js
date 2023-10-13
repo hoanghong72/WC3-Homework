@@ -17,12 +17,9 @@ describe("Add book", () =>{
                 .clickLogin();
             
             profilePage
-                .isUserNameCorrect(book.user.username);
-            profilePage
+                .isUserNameCorrect(book.user.username)
                 .clickDeleteAllBooks()
-                .isDelete();
-                
-               profilePage.clickGoToStore();
+                .clickGoToStore();
 
             bookstore
                 .findBook('Git Pocket Guide')

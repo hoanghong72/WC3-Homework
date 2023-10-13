@@ -17,9 +17,10 @@ export const bookstore = {
 
     clickAddBookToCollection(){
         cy.get('button').contains('Add To Your Collection').click({force:true});
-        cy.once("window:alert", (s) => {
-            expect(s).to.contains("Book added to your collection")
-            //done()
+        cy.on("window:confirm", (s) => {
+           expect(s).to.contains("Book added to your collection");
+           return true;
+            
         });
         return this;
     },
