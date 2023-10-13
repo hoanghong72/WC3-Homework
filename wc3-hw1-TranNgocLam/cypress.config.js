@@ -7,4 +7,7 @@ module.exports = defineConfig({
     },
     baseUrl : "https://demoqa.com",
   },
+  chromeWebSecurity: false,
+ 
+
 });

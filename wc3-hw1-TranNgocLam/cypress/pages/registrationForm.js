@@ -12,7 +12,7 @@ export const registerForm = {
     CHK_HOBBIES: "#hobbiesWrapper :checkbox",
     DLG_UPLOADPICTURE: "#uploadPicture",
     TXT_CURRENTADDRESS: "#currentAddress",
-    DDL_STATE: "#state",
+    DDL_STATE: "#state input",
     DDL_CITY: "#city input",
 
     inputLastName(lastName) {
@@ -94,7 +94,7 @@ export const registerForm = {
     },
 
     inputState(state) {
-        cy.get(this.DDL_STATE).type(state).type('{enter}')
+        cy.get(this.DDL_STATE).type(state, { force: true }).type('{enter}', { force: true })
         return this;
     },
     inputCity(city) {
@@ -191,6 +191,7 @@ export const confirmForm = {
     },
 
     isCorrectAddress(currentAddress) {
+        
         cy.get('table tbody tr')
             .filter((k, tr) => {
                 // txt_hobbies = tr.children[1].innerText

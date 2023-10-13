@@ -6,7 +6,7 @@ describe('Registration Form', () => {
     cy.visit('/automation-practice-form')
   });
 
- /*  it('Register with valid data in required data fields', () => {
+  it('Register with valid data in required data fields', () => {
     cy.get('@registration').then((users) => {
       
       registerForm
@@ -23,15 +23,11 @@ describe('Registration Form', () => {
         .clickClose()
     });
 
-  }); */
+  });
 
 
   it('Register with valid input in all data fields', () => {
     cy.get('@registration').then((users) => {
-      // cy.get('#subjectsInput').type(users.subjects).type('{enter}')
-
-      // cy.get('#hobbiesWrapper :checkbox').check("1")
-      // cy.get('#uploadPicture').selectFile(users.picture)
       
       registerForm
         .inputLastName(users.lastName)
