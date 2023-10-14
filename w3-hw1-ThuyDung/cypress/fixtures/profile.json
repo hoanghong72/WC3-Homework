@@ -1,0 +1,34 @@
+{"valid":
+  {
+    "firstname": "Daisy",
+    "lastname": "Nguyen",
+    "email": "daisynguyen123@gmail.com",
+    "gender" : "Female",
+    "mobile": "0123456789",
+    "dateofbirth":{
+      "day": "16",
+      "month": "March",
+      "year": "2002"
+    },
+    "subjects": "English",
+    "hobbies": "Music",
+    "file": "assets\\picture.png",
+    "currentaddress": "13 Doan Van Bo",
+    "state": "Haryana",
+    "city": "Karnal"
+  }
+,
+"invalid":
+  {
+    "firstname": "::Daisy",
+    "lastname": " Nguyen",
+    "email-1": "daisynguyen123@@gmail.com",
+    "email-2": "daisynguyen123",
+    "email-3": "@gmail.comdaisynguyen123",
+    "dateofbirth":{
+      "day": "16",
+      "month": "March",
+      "year": "2024"
+    }
+}
+}

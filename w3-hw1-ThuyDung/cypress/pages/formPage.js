@@ -1,4 +1,5 @@
 export const formPage ={
+
     TXT_FIRSTNAME: "#firstName",
     TXT_LASTNAME: "#lastName",
     TXT_EMAIL: "#userEmail",
@@ -17,7 +18,7 @@ export const formPage ={
     CHK_MUSIC: "#hobbies-checkbox-3",
     BTN_PICTURE: "#uploadPicture",
     TXA_CURRENTADDRESS: "#currentAddress",
-    TXT_STATE: "#react-select-3-input",
+    TXT_STATE: "#react-select-3-input", 
     TXT_CITY: "#react-select-4-input",
     BTN_SUBMIT: "#submit",
     FRA_FORM: ".modal-dialog modal-lg",
@@ -78,8 +79,11 @@ export const formPage ={
 
     //Subjects
     typeSubjects(subjects){
-        cy.get(this.TXT_SUBJECTS).type(subjects,{force: true});
-        cy.get(this.TXT_SUBJECTS).type('enter');
+        cy.get(this.TXT_SUBJECTS).type(subjects);
+        return this;
+    },
+    selectSubjects(subjects){
+        cy.get(this.CBO_SUBJECTS).contains(subjects).click();
         return this;
     },
 
@@ -110,22 +114,42 @@ export const formPage ={
     },
     //State and city
     typeState(state){
-        cy.get(this.TXT_STATE).type(state,{ force: true });
-        cy.get(this.TXT_STATE).type('enter');
+        cy.get(this.TXT_STATE).type(state,{force: true}).type('{enter}');
         return this;
     },
     typeCity(city){
-        cy.get(this.TXT_CITY).type(city,{ force: true });
-        cy.get(this.TXT_CITY).type('enter',{ force: true });
+        cy.get(this.TXT_CITY).type(city,{force: true}).type('{enter}')
         return this;
     },
     //Submit
     clickSubmit(){
         cy.get(this.BTN_SUBMIT).click({ force: true });
     },
-    //check Form submit sucessfully
-    // isRegistrationformDisplay() {
-    //     cy.get(this.LBL_FORM).should("have.text", "Thanks for submitting the form");
-    // },
+    popup :{
+        TXT_NAME_PO: "table > tbody > tr:nth-child(1) > td:nth-child(2)",
+        TXT_EMAIL_PO: "table > tbody > tr:nth-child(2) > td:nth-child(2)",
+        TXT_GENDER_PO: "table > tbody > tr:nth-child(3) > td:nth-child(2)",
+        TXT_MOBILE_PO: "table > tbody > tr:nth-child(4) > td:nth-child(2)",
+        TXT_DOB_PO: "table > tbody > tr:nth-child(5) > td:nth-child(2)",
+        TXT_SUBJECTS_PO: "table > tbody > tr:nth-child(6) > td:nth-child(2)",
+        TXT_HOBBIES_PO: "table > tbody > tr:nth-child(7) > td:nth-child(2)",
+        TXT_PICTURE_PO: "table > tbody > tr:nth-child(8) > td:nth-child(2)",
+        TXT_ADDRESS_PO: "table > tbody > tr:nth-child(9) > td:nth-child(2)",
+        TXT_STATE_AND_CITY_PO: "table > tbody > tr:nth-child(10) > td:nth-child(2)",
     
+        isAllInformationDisplay(profile){
+            cy.get(this.TXT_NAME_PO).should('have.text',profile.firstname+" "+profile.lastname),
+            cy.get(this.TXT_EMAIL_PO).should('have.text',profile.email),
+            cy.get(this.TXT_GENDER_PO).should('have.text',profile.gender)
+            cy.get(this.TXT_MOBILE_PO).should('have.text',profile.mobile),
+            cy.get(this.TXT_DOB_PO).should('have.text',profile.dateofbirth.day+" "+profile.dateofbirth.month+","+profile.dateofbirth.year),
+            cy.get(this.TXT_SUBJECTS_PO).should('have.text',profile.subjects),
+            cy.get(this.TXT_HOBBIES_PO).should('have.text',profile.hobbies),
+            cy.get(this.TXT_PICTURE_PO).should('have.text',profile.file),
+            cy.get(this.TXT_ADDRESS_PO).should('have.text', profile.currentaddress),
+            cy.get(this.TXT_STATE_AND_CITY_PO).should('have.text',profile.state+" "+profile.city)
+        }
+    }
+    
+
 }
