@@ -1,14 +1,20 @@
 {
-  "firstName": "Vy",
-  "lastName": "Nguyen",
-  "email": "ngphvy01@gmail.com",
-  "gender": "Female",
-  "mobile": "0903960514",
-  "dateOfBirth": "11 October,2023",
-  "subjects": "English",
-  "hobbies": "Reading",
-  "picture": "1.png",
-  "currentAddress": "123 BVD",
-  "state": "NCR",
-  "city": "Delhi"
+  "user": [
+    {
+      "firstName": "Vy",
+      "lastName": "Nguyen",
+      "email": "ngphvy01@gmail.com",
+      "gender": "Female",
+      "mobile": "0903960514",
+      "day":"11",
+      "month":"October",
+      "year":"2023",
+      "subjects": "English",
+      "hobbies": "Reading",
+      "picture": "1.png",
+      "currentAddress": "123 BVD",
+      "state": "NCR",
+      "city": "Delhi"
+    }
+  ]
 }

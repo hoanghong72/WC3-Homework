@@ -3,7 +3,7 @@ import { loginPage } from "../pages/bookstore/loginPage";
 import { profilePage } from "../pages/bookstore/profilePage";
 
 
-describe("Add book", () =>{
+describe("Add book", () => {
     beforeEach(() => {
         cy.fixture("book").as("book");
         cy.visit(Cypress.env("login"));
@@ -15,7 +15,7 @@ describe("Add book", () =>{
                 .typeUsername(book.user.username)
                 .typePassword(book.user.password)
                 .clickLogin();
-            
+
             profilePage
                 .isUserNameCorrect(book.user.username)
                 .clickDeleteAllBooks()
@@ -25,7 +25,6 @@ describe("Add book", () =>{
                 .findBook('Git Pocket Guide')
                 .clickAddBookToCollection();
 
-            
         });
     });
 });

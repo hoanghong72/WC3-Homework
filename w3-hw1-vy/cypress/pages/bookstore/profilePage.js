@@ -1,8 +1,8 @@
 export const profilePage = {
     LBL_USERNAME_VALUE: "#userName-value",
 
-    BTN_SUBMIT: "#submit",
-    BTN_OK_DIALOG: "#closeSmallModal-ok",
+    // BTN_SUBMIT: "#submit",
+    // BTN_OK_DIALOG: "#closeSmallModal-ok",
     BTN_GO_TO_STORE: "#gotoStore",
 
     isUserNameCorrect(username) {
@@ -19,7 +19,7 @@ export const profilePage = {
             expect(["All Books deleted.", "No books available in your's collection!"]).to.include(txt); 
             return true;       
         });
-        
+
         return this;
     },
 
