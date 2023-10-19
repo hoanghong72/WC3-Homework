@@ -2,8 +2,11 @@ export const registrationPage = {
     TXT_FIRSTNAME: "#firstName",
     TXT_LASTNAME: "#lastName",
     TXT_USEREMAIL: "#userEmail",
-    RDO_GENDER: "#gender-radio-2", // only Female
-    LBL_GENDER: "#gender-radio-2 + label",
+
+    RDO_GENDER: "#gender-radio-",
+    LBL_GENDER_FEMALE: "#gender-radio-2 + label",
+    LBL_GENDER_MALE: "#gender-radio-1 + label",
+    LBL_GENDER_OTHER: "#gender-radio-3 + label",
     TXT_USERNUMBER: "#userNumber",
 
     DTP_DATEOFBIRTH: "#dateOfBirthInput",
@@ -12,7 +15,7 @@ export const registrationPage = {
     DTP_DAY: ".react-datepicker__day--0",
 
     TXT_SUBJECTS: "#subjectsInput",
-    CHK_HOBBIES: "#hobbies-checkbox-2", // only Reading
+    CHK_HOBBIES: "#hobbies-checkbox-",
     BTN_PICTURE: "#uploadPicture",
     TXT_ADDRESS: "#currentAddress",
 
@@ -40,7 +43,16 @@ export const registrationPage = {
     },
 
     chooseGender(gender) {
-        cy.get(this.RDO_GENDER).click({ force: true });
+        if (gender == 'Male') {
+            cy.get(this.RDO_GENDER + "1").click({ force: true });
+        }
+        else if (gender == 'Female') {
+            cy.get(this.RDO_GENDER + "2").click({ force: true });
+        }
+        else if (gender == 'Other') {
+            cy.get(this.RDO_GENDER + "3").click({ force: true });
+        }
+
         return this;
     },
 
@@ -49,21 +61,35 @@ export const registrationPage = {
         return this;
     },
 
-    chooseDateOfBirth(day,month,year) {
+    chooseDateOfBirth(day, month, year) {
         cy.get(this.DTP_DATEOFBIRTH).click();
         cy.get(this.DTP_YEAR).select(year);
         cy.get(this.DTP_MONTH).select(month);
-        cy.get(this.DTP_DAY+day).first().click();
+        cy.get(this.DTP_DAY + day).first().click();
         return this;
     },
 
     chooseSubject(subjects) {
-        cy.get(this.TXT_SUBJECTS).type(subjects).type('{enter}');
+        for (let i = 0; i < subjects.length; i++) {
+            cy.get(this.TXT_SUBJECTS).type(subjects[i]).type('{enter}');
+        }
+        //cy.get(this.TXT_SUBJECTS).type(subjects).type('{enter}');
         return this;
     },
 
     chooseHobbies(hobbies) {
-        cy.get(this.CHK_HOBBIES).check({ force: true });
+        for (let i = 0; i < hobbies.length; i++) {
+            if (hobbies[i] == 'Sports') {
+                cy.get(this.CHK_HOBBIES + "1").click({ force: true });
+            }
+            else if (hobbies[i] == 'Reading') {
+                cy.get(this.CHK_HOBBIES + "2").click({ force: true });
+            }
+            else if (hobbies[i] == 'Music') {
+                cy.get(this.CHK_HOBBIES + "3").click({ force: true });
+            }
+        }
+        //cy.get(this.CHK_HOBBIES).check({ force: true });
         return this;
     },
 
@@ -101,47 +127,73 @@ export const registrationPage = {
     RED: "rgb(220, 53, 69)",
     GREEN: "rgb(40, 167, 69)",
 
-    isValid(firstName = true, lastName = true, email = true,
-        gender = true, mobile = true, picture = false) {
+    isFirstNameValid(firstName = true) {
         if (firstName == true) {
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.GREEN)
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.GREEN);
         }
         else {
             cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.RED);
         }
+        return this;
+    },
 
+    isLastNameValid(lastName = true) {
         if (lastName == true) {
-            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.GREEN)
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.GREEN);
         }
         else {
             cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.RED);
         }
+        return this;
+    },
 
+    isEmailValid(email = true) {
         if (email == true) {
-            cy.get(this.TXT_USEREMAIL).should('have.css', 'border-color', this.GREEN)
+            cy.get(this.TXT_USEREMAIL).should('have.css', 'border-color', this.GREEN);
         }
         else {
             cy.get(this.TXT_USEREMAIL).should('have.css', 'border-color', this.RED);
         }
+        return this;
+    },
 
+    isMobileValid(mobile = true) {
         if (mobile == true) {
-            cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.GREEN)
+            cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.GREEN);
         }
         else {
             cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.RED);
         }
+        return this;
+    },
 
+    isGenderValid(gender = true) {
         if (gender == true) {
-            cy.get(this.LBL_GENDER).should('have.css', 'border-color', this.GREEN)
+            cy.get(this.LBL_GENDER_FEMALE).should('have.css', 'border-color', this.GREEN);
+            cy.get(this.LBL_GENDER_MALE).should('have.css', 'border-color', this.GREEN);
+            cy.get(this.LBL_GENDER_OTHER).should('have.css', 'border-color', this.GREEN);
         }
         else {
-            cy.get(this.LBL_GENDER).should('have.css', 'border-color', this.RED);
+            cy.get(this.LBL_GENDER_FEMALE).should('have.css', 'border-color', this.RED);
+            cy.get(this.LBL_GENDER_MALE).should('have.css', 'border-color', this.RED);
+            cy.get(this.LBL_GENDER_OTHER).should('have.css', 'border-color', this.RED);
         }
+        return this;
+    },
 
-        // need to check --> picture = true
-        if (picture == true) {
-            cy.get(this.BTN_PICTURE).invoke('val').should('match', /png|jpg/g);
+    isDOBValid(dob = true) {
+        if (dob == true) {
+            cy.get(this.DTP_DATEOFBIRTH).should('have.css', 'border-color', this.GREEN);
         }
+        else {
+            cy.get(this.DTP_DATEOFBIRTH).should('have.css', 'border-color', this.RED);
+        }
+        return this;
+    },
+
+    isPictureValid() {
+        cy.get(this.BTN_PICTURE).invoke('val').should('match', /png|jpg/g);
+        return this;
     },
 
 };

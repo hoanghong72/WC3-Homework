@@ -2,5 +2,8 @@
     "user":{
         "username":"vynguyen",
         "password":"Vy123456@"
+    },
+    "book":{
+        "bookName":"Git Pocket Guide"
     }
 }
