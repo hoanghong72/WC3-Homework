@@ -1,0 +1,11 @@
+[
+    {
+        "firstName": "Phuong",
+        "lastName": "Vo",
+        "userEmail": "vnphuong3001@gmail.com",
+        "invalidEmail": ["vnphuong3001","vnphuong3001@","vnphuong3001gmail.com"],
+        "userNumber": "0933008846",
+        "invalidNumbers": ["093300884", "vonhuphuon", "093300884P", "7933008846"],
+        "Address": "Nguyen dinh chieu"
+    }
+]
