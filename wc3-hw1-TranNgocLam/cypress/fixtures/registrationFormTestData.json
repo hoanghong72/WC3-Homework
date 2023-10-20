@@ -1,15 +1,99 @@
-{
+[
+  {
     "lastName": "Tran",
     "firstName": "Lam",
+    "email": "tranngoclam@gmail.com",
     "userNumber": "0794202506",
     "gender": "Female",
     "dob_day": "16",
     "dob_month": "June",
     "dob_year": "2001",
-    "subjects" : ["Computer Science", "English"],
-    "hobbies" : ["Reading", "Sports", "Music"],
-    "picture" : "cypress/assests/img/img_file.png",
-    "currentAddress" : "Tan Phu",
-    "state" : "NCR",
-    "city" : "Delhi"
+    "subjects": [
+      "Computer Science",
+      "English"
+    ],
+    "hobbies": [
+      "Reading",
+      "Sports",
+      "Music"
+    ],
+    "picture": "cypress/assests/img_file.png",
+    "currentAddress": "Tan Phu",
+    "state": "NCR",
+    "city": "Delhi"
+  },
+  {
+    "lastName": "  Tran  ",
+    "firstName": "  Lam  ",
+    "userNumber": "0763212508",
+    "gender": "Female",
+    "currentAddress": "  HCM city"
+  },
+  {
+    "lastName": "Tr@n1234",
+    "firstName": "L@m1234",
+    "userNumber": "0794202505",
+    "gender": "Female"
+  },
+  {
+    "lastName": "Tran",
+    "firstName": "Lam",
+    "email": "tranngoclam@",
+    "userNumber": "079",
+    "gender": "Female"
+  },
+  {
+    "lastName": " ",
+    "firstName": " ",
+    "email": "tranngoclam@gmail.com",
+    "userNumber": "0794202506",
+    "gender": "Female",
+    "dob_day": "17",
+    "dob_month": "Oct",
+    "dob_year": "2024",
+    "picture": "cypress/assests/img.pdf"
+  },
+  {
+    "lastName": "Lam",
+    "firstName": "Tran",
+    "email": "tranngoclam@",
+    "userNumber": "0794202abc",
+    "gender": "Female"
+  },
+  {
+    "lastName": "Lam",
+    "firstName": "Tran",
+    "email": "tranngoclam@gmail",
+    "userNumber": "+847942025",
+    "gender": "Female"
+  },
+  {
+    "lastName": "Lam",
+    "firstName": "Tran",
+    "email": "tranngoclam@gmail......................................com",
+    "userNumber": "1763212508",
+    "gender": "Female"
+  },
+  {
+    "lastName": "Lam",
+    "firstName": "Tran",
+    "email": "ngoclam@gmail.com",
+    "userNumber": "0763212508",
+    "gender": "Female"
+  },
+  {
+    "lastName": "Lam",
+    "firstName": "Tran",
+    "email": "ngoclam@gmail.com",
+    "userNumber": "0763212508",
+    "gender": "Male"
+  },
+  {
+    "lastName": "TranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLam",
+    "firstName": "TranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLam",
+    "userNumber": "0763212508",
+    "gender": "Female",
+    "currentAddress": "HCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCityHCMCity",
+    "picture": "cypress/assests/img_larger_than_2mb.jpg"
   }
+]

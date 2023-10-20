@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {
-    "cypress": "^13.3.1"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open"
-
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai-colors": "^1.0.1",
+    "cypress": "^13.3.2",
+    "tinycolor": "^0.0.1"
+  }
 }

@@ -14,7 +14,10 @@ describe('Book Store', { testIsolation: false }, () => {
                 .typePassword(account.password)
                 .clickLogin();
         })
-        profilePage.deleteBook("Git Pocket Guide").navigateToBookStore()
+        profilePage
+        // .deleteAllBooks()
+        .deleteBook("Git Pocket Guide")
+        .navigateToBookStore()
 
     });
 

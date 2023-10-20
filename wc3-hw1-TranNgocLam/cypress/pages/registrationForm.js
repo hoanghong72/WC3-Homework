@@ -1,7 +1,12 @@
+// import chaiColors from 'chai-colors';
+
+// import tinycolor from 'tinycolor2';
 export const registerForm = {
     TXT_LASTNAME: "#lastName",
     TXT_FIRSTNAME: "#firstName",
     RDO_GENDER: "#genterWrapper input",
+    LBL_GENDER: "#genterWrapper label",
+    TXT_EMAIL: "#userEmail",
     TXT_USERNUMBER: "#userNumber",
     BTN_SUBMIT: "#submit",
     DTP_DOB: "#dateOfBirthInput",
@@ -14,6 +19,8 @@ export const registerForm = {
     TXT_CURRENTADDRESS: "#currentAddress",
     DDL_STATE: "#state input",
     DDL_CITY: "#city input",
+    RED: "rgb(220, 53, 69)",
+    GREEN: "rgb(40, 167, 69)",
 
     inputLastName(lastName) {
         cy.get(this.TXT_LASTNAME).type(lastName, { force: true });
@@ -25,8 +32,12 @@ export const registerForm = {
         return this;
     },
 
+    inputEmail(email) {
+        cy.get(this.TXT_EMAIL).type(email, { force: true });
+        return this;
+    },
     checkGender(gender) {
-        cy.get(this.RDO_GENDER).check(gender)
+        cy.get(this.RDO_GENDER).check(gender, {force: true} )
         return this;
     },
 
@@ -44,15 +55,6 @@ export const registerForm = {
         cy.get(this.DTP_DOB_MONTH).select(month);
         // Select day
         cy.get(this.DTP_DOB_DAY + day).first().click();
-
-        /*  // Open date picker
-         cy.get('#dateOfBirthInput').click();
-         // Select year
-         cy.get('.react-datepicker__year-select').select(year);
-         // Select month
-         cy.get('.react-datepicker__month-select').select(month);
-         // Select day
-         cy.get(`.react-datepicker__day--0${day}`).first().click(); */
         return this
     },
 
@@ -68,18 +70,16 @@ export const registerForm = {
         for (let i = 0; i < hobbies.length; i++) {
             switch (hobbies[i]) {
                 case "Sports":
-                    cy.get(this.CHK_HOBBIES).check("1")
+                    cy.get(this.CHK_HOBBIES).check("1", {force: true} )
                     break
                 case "Reading":
-                    cy.get(this.CHK_HOBBIES).check("2")
+                    cy.get(this.CHK_HOBBIES).check("2", {force: true} )
                     break
                 case "Music":
-                    cy.get(this.CHK_HOBBIES).check("3")
+                    cy.get(this.CHK_HOBBIES).check("3", {force: true} )
                     break
             }
-
         }
-
         return this;
     },
 
@@ -106,17 +106,78 @@ export const registerForm = {
         cy.get(this.BTN_SUBMIT).click({ force: true });
         return this;
     },
+    checkFirstNameValid(valid) {
+        if (valid){
+
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.GREEN);
+        }else{
+
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.RED);
+        }
+        return this
+    },
+
+    checkLastNameValid(valid) {
+        if (valid){
+
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.GREEN);
+        }else{
+
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.RED);
+        }
+        
+        return this
+    },
+
+    checkEmailValid(valid) {
+        if (valid){
+
+            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.GREEN);
+        }else{
+
+            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.RED);
+        }
+        return this
+    },
+    checkMobileValid(valid) {
+        if (valid){
+
+            cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.GREEN);
+        }else{
+
+            cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.RED);
+        }
+        return this
+    },
+    isGenderChecked(valid) {
+        if (valid){
+
+            cy.get(this.LBL_GENDER).should('have.css', 'border-color', this.GREEN);
+        }else{
+
+            cy.get(this.LBL_GENDER).should('have.css', 'border-color', this.RED);
+        }
+        return this
+    },
 }
 
 export const confirmForm = {
     BTN_CLOSE: "#closeLargeModal",
+    LBL_STUDENTNAME: "table tbody tr:nth-child(1) td:nth-child(2)",
 
-    isCorrectName(name) {
+    isCorrectName(firstName, lastName) {
+        let name = firstName + ' ' + lastName
+        cy.get(this.LBL_STUDENTNAME)
+            .should('have.text', name)
+        return this
+    },
+
+    isCorrectEmail(email) {
         cy.get('table tbody tr')
             .filter((k, tr) => {
-                return tr.children[1].innerText.includes(name)
+                return tr.children[1].innerText === email
             })
-            .should('have.text', 'Student Name' + name)
+            .should('have.text', 'Student Email' + email)
         return this
     },
 
@@ -183,7 +244,6 @@ export const confirmForm = {
         let filename = pieces[pieces.length - 1];
         cy.get('table tbody tr')
             .filter((k, tr) => {
-                // txt_hobbies = tr.children[1].innerText
                 return tr.children[1].innerText === filename
             })
             .should('have.text', 'Picture' + filename)
@@ -191,7 +251,7 @@ export const confirmForm = {
     },
 
     isCorrectAddress(currentAddress) {
-        
+
         cy.get('table tbody tr')
             .filter((k, tr) => {
                 // txt_hobbies = tr.children[1].innerText
@@ -202,10 +262,9 @@ export const confirmForm = {
     },
 
     isCorrectStateAndCity(state, city) {
-        let txt_statecity = state + " " +city
+        let txt_statecity = state + " " + city
         cy.get('table tbody tr')
             .filter((k, tr) => {
-                // txt_hobbies = tr.children[1].innerText
                 return tr.children[1].innerText === txt_statecity
             })
             .should('have.text', 'State and City' + txt_statecity)
