@@ -1,0 +1,33 @@
+{
+    "firstName": "Nghia",
+    "lastName": "Do",
+    "email": "nghiado211@gmail.com",
+    "email1": "meomeo211",
+    "email2": "meomeo211gmail.com",
+    "email3": "@.com",
+    "email4": "meomeo211@1111111",
+    "email5": "@£@$^@&@*@",
+
+
+    "email6": "meomeo.211@gmail.com",
+    "email7": "meomeo211@gmail-com",
+    "email8": "meomeo211@gmail..com",
+
+
+    "gender": "Female",
+
+    "phoneNumber": "0774859984",
+    "phoneNumber1": "077485998",
+    "phoneNumber2": "07748599*4",
+    "phoneNumber3": "0000000000",
+
+    "month": "November",
+    "year": "2001",
+    "date": "14",
+    "subjects": "Economics",
+    "hobby": "Reading",
+    "file1": "/Users/nghiado/Downloads/kitty.png",
+    "address": "Ho Chi Minh City",
+    "state": "NCR",
+    "city": "Dehli"
+}
