@@ -23,7 +23,14 @@ export const formPage ={
     BTN_SUBMIT: "#submit",
     FRA_FORM: ".modal-dialog modal-lg",
     LBL_FORM: "#example-modal-sizes-title-lg",
-    //Name
+    SYMBOL_INVALID: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\")",
+    SYMBOL_VALID :"url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\")",
+    LBL_OPTION: ".custom-control-label",
+    COLOR_RED: "rgb(220, 53, 69)",
+    COLOR_GREEN: "rgb(40, 167, 69)",
+
+
+//Actions
     typeFirstName(firstname){
         cy.get(this.TXT_FIRSTNAME).type(firstname);
         return this;
@@ -36,118 +43,201 @@ export const formPage ={
         cy.get(this.TXT_EMAIL).type(email);
         return this;
     },
-
-    //Gender
-    selectMale(){
-        cy.get(this.RDO_MALE).check({force: true});
+    selectGender(gender){
+        switch(gender){
+            case 'Male': 
+                cy.get(this.RDO_MALE).check({force: true});
+                break;
+            case 'Female':
+                cy.get(this.RDO_FEMALE).check({force:true});
+                break;
+            case 'Other':
+                cy.get(this.RDO_OTHER).check({force: true});
+                break;
+        }
         return this;
     },
-
-    selectFemale(){
-        cy.get(this.RDO_FEMALE).check({force:true});
-        return this;
-    },
-
-    selectOther(){
-        cy.get(this.RDO_OTHER).check({force:true});
-        return this;
-    },
-
-    //Mobile
     typeMobile(mobile){
         cy.get(this.TXT_MOBILE).type(mobile);
         return this;
     },
-
-    //Date of Birth
-    openDOB(){
+    selectDOB(day, month, year){
         cy.get(this.TXT_DOB).click();
-        return this;
-    },
-    selectMonth(month){
-        cy.get(this.DDL_MONTH).select(month);
-        return this;
-    },
-    selectYear(year){
         cy.get(this.DDL_YEAR).select(year);
-        return this;
-    },
-    selectDay(day){
+        cy.get(this.DDL_MONTH).select(month);
         cy.get(this.DTP_DAY).contains(day).eq(0).click();
         return this;
     },
-
-    //Subjects
-    typeSubjects(subjects){
-        cy.get(this.TXT_SUBJECTS).type(subjects);
-        return this;
-    },
     selectSubjects(subjects){
-        cy.get(this.CBO_SUBJECTS).contains(subjects).click();
+        for (let i=0; i< subjects.length; i++){
+        cy.get(this.TXT_SUBJECTS).type(subjects[i]);
+        cy.get(this.CBO_SUBJECTS).contains(subjects[i]).click();
+        }
         return this;
     },
-
-    //Hobbies
-    checkSports(){
-        cy.get(this.CHK_SPORTS).check({force: true});
+    checkHobbies(hobbies){
+        for(let i=0; i< hobbies.length; i++){
+            if(hobbies[i] === 'Sport'){
+                cy.get(this.CHK_SPORTS).check({force: true});
+            }
+            else if(hobbies[i] === 'Reading'){
+                cy.get(this.CHK_READING).check({force: true});
+            }else if(hobbies[i] === 'Music'){
+                cy.get(this.CHK_MUSIC).check({force: true});
+            }
+        }
         return this;
     },
-    checkReading(){
-        cy.get(this.CHK_READING).check({force: true});
+    uploadPicture(picture){
+        cy.get(this.BTN_PICTURE).selectFile(picture);
         return this;
     },
-    checkMusic(){
-        cy.get(this.CHK_MUSIC).check({force: true});
-        return this;
-    },
-
-    //Upload picture
-    uploadPicture(file){
-        cy.get(this.BTN_PICTURE).selectFile(file);
-        return this;
-    },
-
-    //Address
     typeCurrentAddress(address){
         cy.get(this.TXA_CURRENTADDRESS).type(address);
         return this;
     },
-    //State and city
-    typeState(state){
+    selectStateAndCity(state,city){
         cy.get(this.TXT_STATE).type(state,{force: true}).type('{enter}');
+        cy.get(this.TXT_CITY).type(city,{force: true}).type('{enter}');
         return this;
     },
-    typeCity(city){
-        cy.get(this.TXT_CITY).type(city,{force: true}).type('{enter}')
-        return this;
-    },
-    //Submit
     clickSubmit(){
         cy.get(this.BTN_SUBMIT).click({ force: true });
+        return this;
     },
+
+//Assertion 
+    isFirtsNameValid(isValid){
+        if(isValid === true){
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.COLOR_GREEN);
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'background-image', this.SYMBOL_VALID);
+        }else{
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.COLOR_RED);
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'background-image', this.SYMBOL_INVALID);
+        }
+        return this;
+    },
+    isLastNameValid(isValid){
+        if(isValid === true){
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.COLOR_GREEN);
+            cy.get(this.TXT_LASTNAME).should('have.css', 'background-image', this.SYMBOL_VALID);
+        }else{
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.COLOR_RED);
+            cy.get(this.TXT_LASTNAME).should('have.css', 'background-image', this.SYMBOL_INVALID);
+        }
+        return this;
+    },
+    isMobileValid(isValid){
+        if(isValid === true){
+            cy.get(this.TXT_MOBILE).should('have.css', 'border-color', this.COLOR_GREEN);
+            cy.get(this.TXT_MOBILE).should('have.css', 'background-image', this.SYMBOL_VALID);
+        }else{
+            cy.get(this.TXT_MOBILE).should('have.css', 'border-color', this.COLOR_RED);
+            cy.get(this.TXT_MOBILE).should('have.css', 'background-image', this.SYMBOL_INVALID);
+        }
+        return this;
+    },
+    isEmailValid(isValid){
+        if(isValid === true){
+            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.COLOR_GREEN);
+            cy.get(this.TXT_EMAIL).should('have.css', 'background-image', this.SYMBOL_VALID);
+        }else{
+            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.COLOR_RED);
+            cy.get(this.TXT_EMAIL).should('have.css', 'background-image', this.SYMBOL_INVALID);
+        }
+        return this;
+    },
+    isGenderValid(isValid){
+        for(let i=0; i< 3; i++){
+            cy.get(this.LBL_OPTION).eq(i).within(($el) => {
+                cy.window().then((win) => {
+                    const beforeElement = win.getComputedStyle($el[0], "::before");
+                    const afterElement = win.getComputedStyle($el[0], "::after");
+                    const borderColor = beforeElement.getPropertyValue("border-color");
+                    const color = afterElement.getPropertyValue("color");
+                    if(isValid === true){
+                      expect(borderColor).to.equal(this.COLOR_GREEN);
+                      expect(color).to.equal(this.COLOR_GREEN);
+                    }else{
+                        expect(borderColor).to.equal(this.COLOR_RED);
+                        expect(color).to.equal(this.COLOR_RED);
+                    }
+                })
+            })
+        }
+        return this;
+    },
+
+
+
+
+
+//After regiter successfully => show popup
     popup :{
-        TXT_NAME_PO: "table > tbody > tr:nth-child(1) > td:nth-child(2)",
-        TXT_EMAIL_PO: "table > tbody > tr:nth-child(2) > td:nth-child(2)",
-        TXT_GENDER_PO: "table > tbody > tr:nth-child(3) > td:nth-child(2)",
-        TXT_MOBILE_PO: "table > tbody > tr:nth-child(4) > td:nth-child(2)",
-        TXT_DOB_PO: "table > tbody > tr:nth-child(5) > td:nth-child(2)",
-        TXT_SUBJECTS_PO: "table > tbody > tr:nth-child(6) > td:nth-child(2)",
-        TXT_HOBBIES_PO: "table > tbody > tr:nth-child(7) > td:nth-child(2)",
-        TXT_PICTURE_PO: "table > tbody > tr:nth-child(8) > td:nth-child(2)",
-        TXT_ADDRESS_PO: "table > tbody > tr:nth-child(9) > td:nth-child(2)",
-        TXT_STATE_AND_CITY_PO: "table > tbody > tr:nth-child(10) > td:nth-child(2)",
-    
-        isAllInformationDisplay(profile){
-            cy.get(this.TXT_NAME_PO).should('have.text',profile.firstname+" "+profile.lastname),
-            cy.get(this.TXT_EMAIL_PO).should('have.text',profile.email),
-            cy.get(this.TXT_GENDER_PO).should('have.text',profile.gender)
-            cy.get(this.TXT_MOBILE_PO).should('have.text',profile.mobile),
-            cy.get(this.TXT_DOB_PO).should('have.text',profile.dateofbirth.day+" "+profile.dateofbirth.month+","+profile.dateofbirth.year),
-            cy.get(this.TXT_SUBJECTS_PO).should('have.text',profile.subjects),
-            cy.get(this.TXT_HOBBIES_PO).should('have.text',profile.hobbies),
-            cy.get(this.TXT_PICTURE_PO).should('have.text',profile.file),
-            cy.get(this.TXT_ADDRESS_PO).should('have.text', profile.currentaddress),
-            cy.get(this.TXT_STATE_AND_CITY_PO).should('have.text',profile.state+" "+profile.city)
+        TXT_NAME_POPUP: "table > tbody > tr:nth-child(1) > td:nth-child(2)",
+        TXT_EMAIL_POPUP: "table > tbody > tr:nth-child(2) > td:nth-child(2)",
+        TXT_GENDER_POPUP: "table > tbody > tr:nth-child(3) > td:nth-child(2)",
+        TXT_MOBILE_POPUP: "table > tbody > tr:nth-child(4) > td:nth-child(2)",
+        TXT_DOB_POPUP: "table > tbody > tr:nth-child(5) > td:nth-child(2)",
+        TXT_SUBJECTS_POPUP: "table > tbody > tr:nth-child(6) > td:nth-child(2)",
+        TXT_HOBBIES_POPUP: "table > tbody > tr:nth-child(7) > td:nth-child(2)",
+        TXT_PICTURE_POPUP: "table > tbody > tr:nth-child(8) > td:nth-child(2)",
+        TXT_ADDRESS_POPUP: "table > tbody > tr:nth-child(9) > td:nth-child(2)",
+        TXT_STATE_AND_CITY_POPUP: "table > tbody > tr:nth-child(10) > td:nth-child(2)",
+
+        isNameCorret(firstname, lastname){
+            cy.get(this.TXT_NAME_POPUP).should('have.text',firstname+" "+lastname);
+            return this;
+        },
+        isEmaiCorret(email){
+            cy.get(this.TXT_EMAIL_POPUP).should('have.text',email);
+            return this;
+        },
+        isGenderCorret(gender){
+            cy.get(this.TXT_GENDER_POPUP).should('have.text',gender);
+            return this;
+        },
+        isMobileCorret(mobile){
+            cy.get(this.TXT_MOBILE_POPUP).should('have.text',mobile);
+            return this;
+        },
+        isDOBCorret(day, month, year){
+            cy.get(this.TXT_DOB_POPUP).should('have.text',day+" "+month+","+year);
+            return this;
+        },
+        isSubjectsCorrect(subjects){
+            let subjects_s ="";
+            for ( let i =0; i<subjects.length; i++){
+                subjects_s += subjects[i];
+                if( i < subjects.length-1){
+                    subjects_s += ", ";
+                }
+            }
+            cy.get(this.TXT_SUBJECTS_POPUP).should('have.text',subjects_s);
+            return this;
+        },
+        isHobbiesCorrect(hobbies){
+            let hobbies_s ="";
+            for ( let i =0; i<hobbies.length; i++){
+                hobbies_s += hobbies[i];
+                if( i < hobbies.length-1){
+                    hobbies_s += ", ";
+                }
+            }
+            cy.get(this.TXT_HOBBIES_POPUP).should('have.text',hobbies_s);
+            return this;
+        },
+        isPictureCorrect(picture){
+            cy.get(this.TXT_PICTURE_POPUP).should('have.text',picture);
+            return this;
+        },
+        isCurrentAddressCorrect(currentaddress){
+            cy.get(this.TXT_ADDRESS_POPUP).should('have.text', currentaddress);
+            return this;
+        },
+        isStateAndCityCorrect(state, city){
+            cy.get(this.TXT_STATE_AND_CITY_POPUP).should('have.text',state+" "+city)
+            return this;
         }
     }
     

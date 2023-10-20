@@ -6,6 +6,9 @@ module.exports = {
     baseUrl: "https://demoqa.com",
     env: {
       form: "/automation-practice-form",
+      login: "/login",
+      book: "/books",
+      profile: "/profile",
     },
   },
 };
