@@ -1,0 +1,16 @@
+{
+    "firstName": "NHU",
+    "lastName": "BUI NGUYEN THUY",
+    "email": "nhubnt2508@gmail.com",
+    "gender": "Female",
+    "phoneNumber": "0345596300",
+    "dob_day": "25",
+    "dob_month": "August",
+    "dob_year": "2001",
+    "subjects": "History",
+    "hobby": "Music", 
+    "address": "Pham Van Dong Street, Ho Chi Minh City",
+    "state": "NCR",
+    "city": "Delhi",
+    "picture" : "C:/Users/THUY NHU/Documents/CYPRESS_TEST/cypress/image/leaf.png"
+  }
