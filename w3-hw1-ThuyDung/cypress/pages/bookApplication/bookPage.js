@@ -5,17 +5,9 @@ export const bookPage= {
     LBL_BOOK: "#title-wrapper > div.col-md-9.col-sm-12 label",
     BTN_ADDBOOK : "div.text-right.fullButton",
 
-    isNavigateToBookStore(){
-        cy.get(this.HEADER).should('have.text', "Book Store");
-        return this;
-    },
     findBookByTyping(name){
         cy.get(this.TXT_SEARCH).type(name);
         cy.get(this.BTN_BOOK).contains(name).eq(0).click();
-        return this;
-    },
-    isBookCorrect(name){
-        cy.get(this.LBL_BOOK).should('have.text', name);
         return this;
     },
     addBookToCollection(){

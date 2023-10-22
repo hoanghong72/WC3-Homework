@@ -3,9 +3,6 @@ export const formPage ={
     TXT_FIRSTNAME: "#firstName",
     TXT_LASTNAME: "#lastName",
     TXT_EMAIL: "#userEmail",
-    RDO_MALE: "#gender-radio-1",
-    RDO_FEMALE: "#gender-radio-2",
-    RDO_OTHER: "#gender-radio-3",
     TXT_MOBILE: "#userNumber",
     TXT_DOB :"#dateOfBirthInput",
     DDL_MONTH: ".react-datepicker__month-select",
@@ -13,16 +10,11 @@ export const formPage ={
     DTP_DAY: ".react-datepicker__week .react-datepicker__day",
     TXT_SUBJECTS: "#subjectsInput",
     CBO_SUBJECTS: ".subjects-auto-complete__menu",
-    CHK_SPORTS: "#hobbies-checkbox-1",
-    CHK_READING: "#hobbies-checkbox-2",
-    CHK_MUSIC: "#hobbies-checkbox-3",
     BTN_PICTURE: "#uploadPicture",
     TXA_CURRENTADDRESS: "#currentAddress",
     TXT_STATE: "#react-select-3-input", 
     TXT_CITY: "#react-select-4-input",
     BTN_SUBMIT: "#submit",
-    FRA_FORM: ".modal-dialog modal-lg",
-    LBL_FORM: "#example-modal-sizes-title-lg",
     SYMBOL_INVALID: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\")",
     SYMBOL_VALID :"url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\")",
     LBL_OPTION: ".custom-control-label",
@@ -44,17 +36,7 @@ export const formPage ={
         return this;
     },
     selectGender(gender){
-        switch(gender){
-            case 'Male': 
-                cy.get(this.RDO_MALE).check({force: true});
-                break;
-            case 'Female':
-                cy.get(this.RDO_FEMALE).check({force:true});
-                break;
-            case 'Other':
-                cy.get(this.RDO_OTHER).check({force: true});
-                break;
-        }
+        cy.get('label').contains(gender).prev('input[type="radio"]').check({force:true});
         return this;
     },
     typeMobile(mobile){
@@ -77,14 +59,7 @@ export const formPage ={
     },
     checkHobbies(hobbies){
         for(let i=0; i< hobbies.length; i++){
-            if(hobbies[i] === 'Sport'){
-                cy.get(this.CHK_SPORTS).check({force: true});
-            }
-            else if(hobbies[i] === 'Reading'){
-                cy.get(this.CHK_READING).check({force: true});
-            }else if(hobbies[i] === 'Music'){
-                cy.get(this.CHK_MUSIC).check({force: true});
-            }
+            cy.get('label').contains(hobbies[i]).prev('input[type="checkbox"]').check();
         }
         return this;
     },

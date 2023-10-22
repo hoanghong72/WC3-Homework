@@ -6,25 +6,20 @@ describe('Add a book', () =>{
     beforeEach(() => {
         cy.fixture("user").as("user");
         cy.visit(Cypress.env("login"));
+        loginPage
+        .typeUserName(user.profile.username)
+        .typePassword(user.profile.password)
+        .clickLogin();
     });
     it("Verify that user can add a book into their collection when typing book name on search textbox", ()=>{
         cy.get('@user').then((user) => {
-            loginPage
-                .typeUserName(user.profile.username)
-                .typePassword(user.profile.password)
-                .clickLogin();
             profilePage
-                .isNavigateToProfile()
-                .isUserNameCorrect(user.profile.username)
                 .goToBookStore();
             bookPage
-                .isNavigateToBookStore()
                 .findBookByTyping(user.book.name)
-                .isBookCorrect(user.book.name)
                 .addBookToCollection()
                 .isBookAdd()
                 .clickProfile()
-                .isNavigateToProfile();
             profilePage
                 .isBookAdd(user.book.name);
                 
