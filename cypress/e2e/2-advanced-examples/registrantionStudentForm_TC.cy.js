@@ -1,179 +1,171 @@
-/// <reference types='cypress'/>
 
-import { Registpage, confirmform } from "../pages/Registpage";
+
+import { Registpage} from "../pages/Registpage";
+import { confirmform } from "../pages/Confirmform";
 
 
 describe('demoQA - Regist Form - Sucessfully', () => {
   beforeEach(() => {
     cy.fixture("account").as("user");
-    cy.visit('https://demoqa.com/automation-practice-form');
+    cy.visit(Cypress.env("regist"));
     
-  })
+  });
   
-  // HAPPY CASE
   it ('User filling all valid infor', () => {
       cy.get("@user").then((user) => {
         Registpage
-        .typeFirstname(user.firstName)
-        .typeLastname(user.lastName)
-        .typeEmail(user.email)
-        .selectGender(user.gender)
-        .typeUserMobile(user.phoneNumber)
-        .chooseDOB(user.month, user.year, user.date)
-        .chooseSubjects(user.subjects)
-        .selectHobbies(user.hobby)
-        .choosePiture(user.file1)
-        .typeAddress(user.address)
+        .typeFirstname(user.firstName.valid)
+        .typeLastname(user.lastName.valid)
+        .typeEmail(user.email.valid)
+        .selectGender(user.gender [1])
+        .typeUserMobile(user.phoneNumber.valid)
+        .chooseDOB(user.month, user.year.valid, user.date)
+        .chooseSubjects(user.subjects) 
+        .selectHobbies(user.hobby[1])
+        .choosePiture(user.file.valid)
+        .typeAddress(user.address.valid) 
         .typeState(user.state)
         .typeCity(user.city)
         .clickSubmit()
 
         confirmform
-        //.isNameCorrect(user.firstName+ " " + user.lastName)
-        .isMailCorrect(user.email)
-        .isGenderCorrect(user.gender)
-        .isMobileCorrect(user.phoneNumber)
-        .isDOBCorrect(user.date, user.month, user.year)
+        .isNameCorrect(user.firstName.valid, user.lastName.valid)
+        .isMailCorrect(user.email.valid)
+        .isGenderCorrect(user.gender [1])
+        .isMobileCorrect(user.phoneNumber.valid)
+        .isDOBCorrect(user.date, user.month, user.year.valid)
         .isSubjectsCorrect(user.subjects)
         .isHobbiesCorrect(user.hobby)
-        //.isPictureCorrect(user.file1)
-        .isAddressCorrect(user.address)
-        .isState_and_City_Correct(user.state+ " " + user.city)
-      });
+        .isPictureCorrect(user.file.valid)
+        .isAddressCorrect(user.address.valid)
+        .isState_and_City_Correct(user.state+ " " + user.city) 
+      }); 
       cy.get('#closeLargeModal').click({force:true})
+    });
+
+    it ('User can not submit when does not fill any infotmation', () => {
+      cy.get("@user").then((user) => {
+      Registpage
+      .clickSubmit ();
+
+      confirmform
+      .isNameCorrect(user.firstName.valid+ " " + user.lastName.valid)
+      .isGenderCorrect(user.gender [1])
+      .isMobileCorrect(user.phoneNumber.valid)
+    });
+    cy.get('#closeLargeModal').click({force:true})
     });
 
     it ('User filling requirement information only', () => {
       cy.get("@user").then((user) => {
         Registpage
-        .typeFirstname(user.firstName)
-        .typeLastname(user.lastName)
-        .selectGender(user.gender)
-        .typeUserMobile(user.phoneNumber)
+        .typeFirstname(user.firstName.valid)
+        .typeLastname(user.lastName.valid)
+        .selectGender(user.gender [1])
+        .typeUserMobile(user.phoneNumber.valid)
         .clickSubmit()
 
         confirmform
-        //.isNameCorrect(user.firstName+ " " +user.lastName)
-        .isGenderCorrect(user.gender)
-        .isMobileCorrect(user.phoneNumber)
+        .isNameCorrect(user.firstName.valid+ " " + user.lastName.valid)
+        .isGenderCorrect(user.gender [1])
+        .isMobileCorrect(user.phoneNumber.valid)
       });
       cy.get('#closeLargeModal').click({force:true})
+    }); 
+
+  // USER CAN'T SUBMIT WITH INVALID NAME
+
+  it('Wrong Firstname - BUG', () => {
+    cy.get("@user").then((user) => {
+      Registpage
+      .typeFirstname(user.firstName.invalid)
+      .typeLastname(user.lastName.valid)
+      .selectGender(user.gender [1])
+      .typeUserMobile(user.phoneNumber.valid)
+      .typeEmail(user.email.valid)    
+      .clickSubmit()
+      Registpage
+      .firstNameValid(false)
+    });
     });
 
-  });
-  
-// UNHAPPY CASE  
-  describe('demoQA - Regist Form - Unsucessfully', () => {
-    beforeEach(() => {
-      cy.fixture("invalid").as("invalid");
-      cy.visit('https://demoqa.com/automation-practice-form');
-      
-    })
-
-    it('No @ or domain', () => {
-      cy.get("@invalid").then((invalid) => {
+    it('Wrong Lastname - BUG', () => {
+      cy.get("@user").then((user) => {
         Registpage
-        .typeFirstname(invalid.firstName)
-        .typeLastname(invalid.lastName)
-        .typeEmail(invalid.email1)
-        .selectGender(invalid.gender)
-        .typeUserMobile(invalid.phoneNumber)
-        .chooseDOB(invalid.month, invalid.year, invalid.date)
-        .chooseSubjects(invalid.subjects)
-        .selectHobbies(invalid.hobby)
-        .choosePiture(invalid.file1)
-        .typeAddress(invalid.address)
-        .typeState(invalid.state)
-        .typeCity(invalid.city)
+        .typeFirstname(user.firstName.valid)
+        .typeLastname(user.lastName.invalid)
+        .selectGender(user.gender [1])
+        .typeUserMobile(user.phoneNumber.valid)
+        .typeEmail(user.email.valid)    
         .clickSubmit()
-
-        confirmform
-        //.isNameCorrect(user.firstName+ " " + user.lastName)
-        .isMailCorrect(invalid.email)
-        .isGenderCorrect(invalid.gender)
-        .isMobileCorrect(invalid.phoneNumber)
-        .isDOBCorrect(invalid.date, invalid.month, invalid.year)
-        .isSubjectsCorrect(invalid.subjects)
-        .isHobbiesCorrect(invalid.hobby)
-        //.isPictureCorrect(user.file1)
-        .isAddressCorrect(invalid.address)
-        .isState_and_City_Correct(invalid.state+ " " + invalid.city)
+        Registpage
+        .lastNameValid(false)
       });
-      cy.get('#closeLargeModal').click({force:true})
-        
-      })
+      });
 
-      it('Bug on email - user can submit subcess fully with wrong email format', () => {
-        cy.get("@invalid").then((invalid) => {
+  // USER CAN'T SUBMIT WITH INVALID EMAIL  
+    it ('No @ or domain', () => {
+      cy.get("@user").then((user) => {
+        Registpage
+        .typeFirstname(user.firstName)
+        .typeLastname(user.lastName)
+        .selectGender(user.gender [1])
+        .typeUserMobile(user.phoneNumber.valid)
+        .typeEmail(user.email.invalid[0])    
+        .clickSubmit()
+        Registpage
+        .emailValid(false)
+      });
+      });
+
+      it('Leading dash in domain', () => {
+        cy.get("@user").then((user) => {
           Registpage
-          .typeFirstname(invalid.firstName)
-          .typeLastname(invalid.lastName)
-          .typeEmail(invalid.email6)
-          .selectGender(invalid.gender)
-          .typeUserMobile(invalid.phoneNumber)
-          .chooseDOB(invalid.month, invalid.year, invalid.date)
-          .chooseSubjects(invalid.subjects)
-          .selectHobbies(invalid.hobby)
-          .choosePiture(invalid.file1)
-          .typeAddress(invalid.address)
-          .typeState(invalid.state)
-          .typeCity(invalid.city)
+          .typeFirstname(user.firstName)
+          .typeLastname(user.lastName)
+          .selectGender(user.gender [1])
+          .typeUserMobile(user.phoneNumber.valid)
+          .typeEmail(user.email.invalid [4])    
           .clickSubmit()
-  
-          confirmform
-          //.isNameCorrect(user.firstName+ " " + user.lastName)
-          .isMailCorrect(invalid.email6)
-          .isGenderCorrect(invalid.gender)
-          .isMobileCorrect(invalid.phoneNumber)
-          .isDOBCorrect(invalid.date, invalid.month, invalid.year)
-          .isSubjectsCorrect(invalid.subjects)
-          .isHobbiesCorrect(invalid.hobby)
-          //.isPictureCorrect(user.file1)
-          .isAddressCorrect(invalid.address)
-          .isState_and_City_Correct(invalid.state+ " " + invalid.city)
+          Registpage
+          .emailValid(false)
         });
-        cy.get('#closeLargeModal').click({force:true})
-          
-        })
+        });
 
+    // USER CAN'T SUBMIT WITH INVALID PHONENUMBER
+      it('Including special character', () => {
+        cy.get("@user").then((user) => {
+          Registpage
+          .typeFirstname(user.firstName)
+          .typeLastname(user.lastName)
+          .selectGender(user.gender [1])
+          .typeUserMobile(user.phoneNumber.invalid[1])
+          .typeEmail(user.email.valid)    
+          .clickSubmit()
+          Registpage
+          .mobileValid(false)
+        });
+        });
 
-        it('Bug on email - user can submit subcess fully with wrong email format', () => {
-          cy.get("@invalid").then((invalid) => {
+        it('All number are the same - BUG', () => {
+          cy.get("@user").then((user) => {
             Registpage
-            .typeFirstname(invalid.firstName)
-            .typeLastname(invalid.lastName)
-            .typeEmail(invalid.email)
-            .selectGender(invalid.gender)
-            .typeUserMobile(invalid.phoneNumber1)
-            .chooseDOB(invalid.month, invalid.year, invalid.date)
-            .chooseSubjects(invalid.subjects)
-            .selectHobbies(invalid.hobby)
-            .choosePiture(invalid.file1)
-            .typeAddress(invalid.address)
-            .typeState(invalid.state)
-            .typeCity(invalid.city)
+            .typeFirstname(user.firstName)
+            .typeLastname(user.lastName)
+            .selectGender(user.gender [1])
+            .typeUserMobile(user.phoneNumber.invalid[2])
+            .typeEmail(user.email.valid)    
             .clickSubmit()
-    
-            confirmform
-            //.isNameCorrect(user.firstName+ " " + user.lastName)
-            .isMailCorrect(invalid.email)
-            .isGenderCorrect(invalid.gender)
-            .isMobileCorrect(invalid.phoneNumber1)
-            .isDOBCorrect(invalid.date, invalid.month, invalid.year)
-            .isSubjectsCorrect(invalid.subjects)
-            .isHobbiesCorrect(invalid.hobby)
-            //.isPictureCorrect(user.file1)
-            .isAddressCorrect(invalid.address)
-            .isState_and_City_Correct(invalid.state+ " " + invalid.city)
+            Registpage
+            .mobileValid(false)
           });
-          cy.get('#closeLargeModal').click({force:true})
-            
-          })
+          });
       
-    })
+    });
+
+  
 
 
       
-
 
 
