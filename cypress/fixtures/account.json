@@ -1,0 +1,62 @@
+{
+      "firstName": {
+            "valid": "Nghia",
+            "invalid": "Nghiaaaaa"
+      },      
+      "lastName": {
+            "valid": "Do",
+            "invalid": "1b2u2u22"
+      },
+      "email": {
+            "valid": "meomeo211@gmail.com",
+            "invalid": [
+                  "meomeo211",
+                  "@.com",
+                  "meomeo211@1111111",
+                  "@£@$^@&@*@",
+                  "meomeo211@gmail-com",
+                  "meomeo211@gmail..com"
+            ]},
+      "gender": [
+            "Male",
+            "Female",
+            "Other"
+      ],
+            
+      "phoneNumber": {
+            "valid": "0774859984",
+            "invalid": [
+                  "077485998",
+                  "07748599*4",
+                  "0000000000"
+            ]},
+      "month": "November",
+      "year": {
+            "valid": "2001",
+            "invalid": [
+                  "2023",
+                  "2025",
+                  "1988"
+            ]}, 
+      "date": "14",
+      "subjects": "Economics",
+      "hobby": [
+            "Sport",
+            "Reading",
+            "Music"
+      ],
+      "file" :{
+            "valid": "/Users/nghiado/Downloads/kitty.png",
+            "invalid": [
+                  "/Users/nghiado/Downloads/Java_Script.pdf"
+            ]},
+      "address": {
+            "valid": "Ho Chi Minh City",
+            "invalid": [
+                  "Thành Phố Mộng Mơ"
+      ]},
+      "state": "NCR",
+      "city": "Dehli"
+
+}     
+
