@@ -1,0 +1,17 @@
+{
+    "firstName": "Thanh Hang",
+    "lastName": "Nguyen",
+    "email": "thanhhang724@gmail.com",
+    "gender": "Female",
+    "mobile": "0901846000",
+    "day": "12",
+    "month": "March",
+    "year": "1999",
+    "subjects": ["Chemistry","Maths","Physics"],
+    "hobbies": "Music",
+    "picture": "daisyflower.png",
+    "currentAddress": "Ho Chi Minh",
+    "state": "Uttar Pradesh",
+    "city": "Agra"
+    
+}
