@@ -1,12 +1,13 @@
-
 import { formPage } from "../pages/registrationForm/formPage";
+
 describe('Register', () => {
   beforeEach(() => {
     cy.fixture("profile").as("profile")
     // cy.fixture("data").as("data");
     cy.visit(Cypress.env("form"));
   });
-  it.skip("Can registers with valid data in all fields ", () => {
+
+  it("Can registers with valid data in all fields ", () => {
     cy.get("@profile").then((profile) => {
       formPage
         .typeFirstName(profile.firstname.valid[0])
@@ -34,7 +35,8 @@ describe('Register', () => {
         .isStateAndCityCorrect(profile.state, profile.city);
     });
   });
-  it.skip("Can registers with valid data in mandatory fields", ()=>{
+
+  it("Can registers with valid data in mandatory fields", ()=>{
     cy.get("@profile").then((profile) => {
       formPage
         .typeFirstName(profile.firstname.valid[0])
@@ -48,8 +50,8 @@ describe('Register', () => {
         .isMobileCorret(profile.mobile.valid[0])
     });
   });
-
-  it.skip("Cannot register when not input any mandatory fields",()=>{
+  
+  it("Cannot register when not input any mandatory fields",()=>{
       formPage
         .clickSubmit()
         .isFirtsNameValid(false)
@@ -58,7 +60,6 @@ describe('Register', () => {
         .isMobileValid(false);
   });
 
-  
   const profile = require('../fixtures/profile.json');
 
   const listInvalidFirstName = profile.firstname.invalid;
