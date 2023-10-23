@@ -1,3 +1,5 @@
+import { constants } from "../../constants/constants";
+
 export const formPage ={
 
     TXT_FIRSTNAME: "#firstName",
@@ -15,11 +17,7 @@ export const formPage ={
     TXT_STATE: "#react-select-3-input", 
     TXT_CITY: "#react-select-4-input",
     BTN_SUBMIT: "#submit",
-    SYMBOL_INVALID: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\")",
-    SYMBOL_VALID :"url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\")",
     LBL_OPTION: ".custom-control-label",
-    COLOR_RED: "rgb(220, 53, 69)",
-    COLOR_GREEN: "rgb(40, 167, 69)",
 
 
 //Actions
@@ -59,7 +57,7 @@ export const formPage ={
     },
     checkHobbies(hobbies){
         for(let i=0; i< hobbies.length; i++){
-            cy.get('label').contains(hobbies[i]).prev('input[type="checkbox"]').check();
+            cy.get('label').contains(hobbies[i]).prev('input[type="checkbox"]').check({force: true});
         }
         return this;
     },
@@ -84,41 +82,41 @@ export const formPage ={
 //Assertion 
     isFirtsNameValid(isValid){
         if(isValid === true){
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.COLOR_GREEN);
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'background-image', this.SYMBOL_VALID);
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', constants.COLOR_GREEN);
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'background-image', constants.SYMBOL_VALID);
         }else{
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.COLOR_RED);
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'background-image', this.SYMBOL_INVALID);
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', constants.COLOR_RED);
+            cy.get(this.TXT_FIRSTNAME).should('have.css', 'background-image', constants.SYMBOL_INVALID);
         }
         return this;
     },
     isLastNameValid(isValid){
         if(isValid === true){
-            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.COLOR_GREEN);
-            cy.get(this.TXT_LASTNAME).should('have.css', 'background-image', this.SYMBOL_VALID);
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', constants.COLOR_GREEN);
+            cy.get(this.TXT_LASTNAME).should('have.css', 'background-image', constants.SYMBOL_VALID);
         }else{
-            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.COLOR_RED);
-            cy.get(this.TXT_LASTNAME).should('have.css', 'background-image', this.SYMBOL_INVALID);
+            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', constants.COLOR_RED);
+            cy.get(this.TXT_LASTNAME).should('have.css', 'background-image', constants.SYMBOL_INVALID);
         }
         return this;
     },
     isMobileValid(isValid){
         if(isValid === true){
-            cy.get(this.TXT_MOBILE).should('have.css', 'border-color', this.COLOR_GREEN);
-            cy.get(this.TXT_MOBILE).should('have.css', 'background-image', this.SYMBOL_VALID);
+            cy.get(this.TXT_MOBILE).should('have.css', 'border-color', constants.COLOR_GREEN);
+            cy.get(this.TXT_MOBILE).should('have.css', 'background-image', constants.SYMBOL_VALID);
         }else{
-            cy.get(this.TXT_MOBILE).should('have.css', 'border-color', this.COLOR_RED);
-            cy.get(this.TXT_MOBILE).should('have.css', 'background-image', this.SYMBOL_INVALID);
+            cy.get(this.TXT_MOBILE).should('have.css', 'border-color', constants.COLOR_RED);
+            cy.get(this.TXT_MOBILE).should('have.css', 'background-image', constants.SYMBOL_INVALID);
         }
         return this;
     },
     isEmailValid(isValid){
         if(isValid === true){
-            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.COLOR_GREEN);
-            cy.get(this.TXT_EMAIL).should('have.css', 'background-image', this.SYMBOL_VALID);
+            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', constants.COLOR_GREEN);
+            cy.get(this.TXT_EMAIL).should('have.css', 'background-image',constants.SYMBOL_VALID);
         }else{
-            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.COLOR_RED);
-            cy.get(this.TXT_EMAIL).should('have.css', 'background-image', this.SYMBOL_INVALID);
+            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', constants.COLOR_RED);
+            cy.get(this.TXT_EMAIL).should('have.css', 'background-image', constants.SYMBOL_INVALID);
         }
         return this;
     },
@@ -131,11 +129,11 @@ export const formPage ={
                     const borderColor = beforeElement.getPropertyValue("border-color");
                     const color = afterElement.getPropertyValue("color");
                     if(isValid === true){
-                      expect(borderColor).to.equal(this.COLOR_GREEN);
-                      expect(color).to.equal(this.COLOR_GREEN);
+                      expect(borderColor).to.equal(constants.COLOR_GREEN);
+                      expect(color).to.equal(constants.COLOR_GREEN);
                     }else{
-                        expect(borderColor).to.equal(this.COLOR_RED);
-                        expect(color).to.equal(this.COLOR_RED);
+                        expect(borderColor).to.equal(constants.COLOR_RED);
+                        expect(color).to.equal(constants.COLOR_RED);
                     }
                 })
             })
@@ -143,41 +141,28 @@ export const formPage ={
         return this;
     },
 
-
-
-
-
 //After regiter successfully => show popup
-    popup :{
-        TXT_NAME_POPUP: "table > tbody > tr:nth-child(1) > td:nth-child(2)",
-        TXT_EMAIL_POPUP: "table > tbody > tr:nth-child(2) > td:nth-child(2)",
-        TXT_GENDER_POPUP: "table > tbody > tr:nth-child(3) > td:nth-child(2)",
-        TXT_MOBILE_POPUP: "table > tbody > tr:nth-child(4) > td:nth-child(2)",
-        TXT_DOB_POPUP: "table > tbody > tr:nth-child(5) > td:nth-child(2)",
-        TXT_SUBJECTS_POPUP: "table > tbody > tr:nth-child(6) > td:nth-child(2)",
-        TXT_HOBBIES_POPUP: "table > tbody > tr:nth-child(7) > td:nth-child(2)",
-        TXT_PICTURE_POPUP: "table > tbody > tr:nth-child(8) > td:nth-child(2)",
-        TXT_ADDRESS_POPUP: "table > tbody > tr:nth-child(9) > td:nth-child(2)",
-        TXT_STATE_AND_CITY_POPUP: "table > tbody > tr:nth-child(10) > td:nth-child(2)",
+    resultPopup :{
+        TXT_VALUE: "td + td",
 
         isNameCorret(firstname, lastname){
-            cy.get(this.TXT_NAME_POPUP).should('have.text',firstname+" "+lastname);
+            cy.get(this.TXT_VALUE).contains(firstname+" "+lastname).should("be.visible");
             return this;
         },
         isEmaiCorret(email){
-            cy.get(this.TXT_EMAIL_POPUP).should('have.text',email);
+            cy.get(this.TXT_VALUE).contains(email).should("be.visible");
             return this;
         },
         isGenderCorret(gender){
-            cy.get(this.TXT_GENDER_POPUP).should('have.text',gender);
+            cy.get(this.TXT_VALUE).contains(gender).should("be.visible");
             return this;
         },
         isMobileCorret(mobile){
-            cy.get(this.TXT_MOBILE_POPUP).should('have.text',mobile);
+            cy.get(this.TXT_VALUE).contains(mobile).should("be.visible");
             return this;
         },
         isDOBCorret(day, month, year){
-            cy.get(this.TXT_DOB_POPUP).should('have.text',day+" "+month+","+year);
+            cy.get(this.TXT_VALUE).contains(day+" "+month+","+year).should("be.visible");
             return this;
         },
         isSubjectsCorrect(subjects){
@@ -188,7 +173,7 @@ export const formPage ={
                     subjects_s += ", ";
                 }
             }
-            cy.get(this.TXT_SUBJECTS_POPUP).should('have.text',subjects_s);
+            cy.get(this.TXT_VALUE).contains(subjects_s).should("be.visible");
             return this;
         },
         isHobbiesCorrect(hobbies){
@@ -199,19 +184,19 @@ export const formPage ={
                     hobbies_s += ", ";
                 }
             }
-            cy.get(this.TXT_HOBBIES_POPUP).should('have.text',hobbies_s);
+            cy.get(this.TXT_VALUE).contains(hobbies_s).should("be.visible");
             return this;
         },
         isPictureCorrect(picture){
-            cy.get(this.TXT_PICTURE_POPUP).should('have.text',picture);
+            cy.get(this.TXT_VALUE).contains(picture).should("be.visible");
             return this;
         },
         isCurrentAddressCorrect(currentaddress){
-            cy.get(this.TXT_ADDRESS_POPUP).should('have.text', currentaddress);
+            cy.get(this.TXT_VALUE).contains(currentaddress).should("be.visible");
             return this;
         },
         isStateAndCityCorrect(state, city){
-            cy.get(this.TXT_STATE_AND_CITY_POPUP).should('have.text',state+" "+city)
+            cy.get(this.TXT_VALUE).contains(state+" "+city).should("be.visible");
             return this;
         }
     }

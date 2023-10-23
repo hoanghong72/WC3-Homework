@@ -1,0 +1,40 @@
+{
+    "firstname": {
+        "valid": ["Daisy"],
+        "invalid": [" ", "Daisy123", "Daisy!@#"]
+    },
+    "lastname": {
+        "valid": ["Nguyen"],
+        "invalid": [" ", "Nguyen123", "Nguyen!@#"]
+    }, 
+    "email":{
+        "valid": ["daisy123@example.com"],
+        "invalid": ["daisy123@yahoo.com", "daisy$%^123@example.com", "daisy123@", "daisy123example.com"]
+    },
+    "gender": "Female",
+    "mobile": {
+        "valid": ["0123456789"],
+        "invalid": [" ", "0123456!@#", "abc456789", "0123456"]
+    },
+    "DOB":{
+        "valid": {
+            "day": "16",
+            "month": "March",
+            "year": "2002"
+        },
+        "invalid":{
+            "day": "16",
+            "month": "March",
+            "year": "2030"
+        }
+    },
+    "subjects":["English", "Computer Science"],
+    "hobbies":["Music", "Reading"],
+    "picture":{
+        "valid": "assets\\daisy.png",
+        "invalid": "assets\\daisy.pdf"
+    },
+    "currentaddress": "13 Doan Van Bo",
+    "state": "Haryana",
+    "city": "Karnal"
+}
