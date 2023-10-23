@@ -1,0 +1,12 @@
+{
+  "name": "wc3-homework",
+  "version": "1.0.0",
+  "description": "- [Installing Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
