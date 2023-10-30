@@ -117,7 +117,7 @@
 					"variable": [
 						{
 							"key": "bookId",
-							"value": "{{bookID}}"
+							"value": "{{book_id}}"
 						}
 					]
 				}
@@ -302,7 +302,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"clientName\": \"Alice\",\r\n   \"clientEmail\": \"3@gmail.com\"\r\n}",
+					"raw": "{\r\n   \"clientName\": \"Alice\",\r\n   \"clientEmail\": \"4@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
