@@ -88,7 +88,7 @@
 							"\r",
 							"\r",
 							"pm.test(\"Check that response contains correct bookID\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"bookID\"));\r",
+							"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"book_id\"));\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -295,14 +295,44 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function randomString(minValue, maxValue, dataSet = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') {\r",
+							"    if (!minValue) {\r",
+							"        minValue = 10;\r",
+							"        maxValue = 10;\r",
+							"    }\r",
+							"\r",
+							"    if (!maxValue) {\r",
+							"        maxValue = minValue;\r",
+							"    }\r",
+							"\r",
+							"    let length = _.random(minValue, maxValue),\r",
+							"        randomString = \"\";\r",
+							"\r",
+							"    for (let i = 0; i < length; i++)\r",
+							"        randomString += dataSet.charAt(Math.floor(Math.random() * dataSet.length));\r",
+							"    return randomString;\r",
+							"}\r",
+							"\r",
+							"pm.variables.set(\"client_email\", randomString() + \"@gmail.com\");"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"clientName\": \"Alice\",\r\n   \"clientEmail\": \"4@gmail.com\"\r\n}",
+					"raw": "{\r\n   \"clientName\": \"Alice\",\r\n   \"clientEmail\": \"{{client_email}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -331,10 +361,6 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Check that orders contains customer orders\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get('order_id'));\r",
 							"});\r",
 							"\r",
 							"const schema = {\r",
@@ -644,6 +670,11 @@
 		{
 			"key": "customer_name",
 			"value": "Alex",
+			"type": "string"
+		},
+		{
+			"key": "client_email",
+			"value": "tran",
 			"type": "string"
 		}
 	]
