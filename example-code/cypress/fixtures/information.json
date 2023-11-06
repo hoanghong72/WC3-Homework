@@ -1,0 +1,16 @@
+{
+  "firstname": "Anh",
+  "lastname":"Nguyen",
+  "email": "minhanhnguyen@gmail.com",
+  "gender":"Female",
+  "mobile":"0825024569",
+  "DOB_day":"21",
+  "DOB_month":"October",
+  "DOB_year":"2002",
+  "subjects":["Maths", "History","Physics"],
+  "hobbies":["Sports","Reading","Music"],
+  "picture": "img/1.jpg",
+  "currentAdress":"ThuDuc",
+  "state":"NCR",
+  "city":"Gurgaon"
+}
