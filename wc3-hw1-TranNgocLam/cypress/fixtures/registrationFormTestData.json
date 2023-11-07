@@ -30,63 +30,50 @@
     "currentAddress": "  HCM city"
   },
   {
-    "lastName": "Tr@n1234",
-    "firstName": "L@m1234",
+    "name": [
+      {
+        "lastName": "Tr@n1234",
+        "firstName": "L@m1234"
+      },
+      {
+        "lastName": " ",
+        "firstName": " "
+      }
+    ],
     "userNumber": "0794202505",
     "gender": "Female"
   },
   {
     "lastName": "Tran",
     "firstName": "Lam",
-    "email": "tranngoclam@",
-    "userNumber": "0795",
-    "gender": "Female"
-  },
-  {
-    "lastName": " ",
-    "firstName": " ",
     "email": "tranngoclam@gmail.com",
     "userNumber": "0794202506",
     "gender": "Female",
-    "dob_day": "17",
-    "dob_month": "Oct",
-    "dob_year": "2024",
     "picture": "cypress/assests/img.pdf"
   },
   {
-    "lastName": "Lam",
-    "firstName": "Tran",
-    "email": "tranngoclam@",
-    "userNumber": "0794202abc",
-    "gender": "Female"
-  },
-  {
-    "lastName": "Lam",
-    "firstName": "Tran",
-    "email": "tranngoclam@gmail",
-    "userNumber": "+847942025",
-    "gender": "Female"
-  },
-  {
-    "lastName": "Lam",
-    "firstName": "Tran",
-    "email": "tranngoclam@gmail......................................com",
-    "userNumber": "1763212508",
-    "gender": "Female"
-  },
-  {
-    "lastName": "Lam",
-    "firstName": "Tran",
-    "email": "ngoclam@gmail.com",
+    "lastName": "Tran",
+    "firstName": "Lam",
+    "invalidEmailAndNumber": [
+      {
+        "email": "tranngoclam",
+        "userNumber": "0794202abc"
+      },
+      {
+        "email": "tranngoclam@",
+        "userNumber": "+847942025"
+      },
+      {
+        "email": "tranngoclam@gmail",
+        "userNumber": "1763212508"
+      },
+      {
+        "email": "tranngoclam@gmail......................................com",
+        "userNumber": "079"
+      }
+    ],
     "userNumber": "0763212508",
     "gender": "Female"
-  },
-  {
-    "lastName": "Lam",
-    "firstName": "Tran",
-    "email": "ngoclam@gmail.com",
-    "userNumber": "0763212508",
-    "gender": "Male"
   },
   {
     "lastName": "TranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLamTranNgocLam",

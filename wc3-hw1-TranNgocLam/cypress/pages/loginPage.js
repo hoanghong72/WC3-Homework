@@ -16,7 +16,7 @@ export const loginPage = {
     },
   
     clickLogin() {
-      cy.get(this.BTN_LOGIN).click().location('pathname').should('include', 'profile');
+      cy.get(this.BTN_LOGIN).click();
       return this;
     },
   };

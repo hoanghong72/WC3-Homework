@@ -7,7 +7,7 @@ export const booksPage = {
         cy.get(this.TB_BOOK).contains(book).click();
         cy.get('button').contains('Add To Your Collection').click({ force: true });
         cy.on("window:confirm", (s) => {
-            const runout = ['Book added to your collection', 'Book already present in your collection!']
+            const runout = ['Book added to your collection']
             const regex = new RegExp(`${runout.join('|')}`, 'g')
             expect(s).to.contains(regex);
             return true

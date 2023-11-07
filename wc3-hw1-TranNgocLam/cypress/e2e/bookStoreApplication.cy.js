@@ -6,7 +6,6 @@ import { booksPage } from "../pages/booksPage";
 describe('Book Store', { testIsolation: false }, () => {
 
     before(() => {
-        // cy.fixture('registrationFormTestData.json').as('registration')
         cy.visit('/login')
         cy.fixture("account").then((account) => {
             loginPage
@@ -15,14 +14,15 @@ describe('Book Store', { testIsolation: false }, () => {
                 .clickLogin();
         })
         profilePage
-        // .deleteAllBooks()
-        .deleteBook("Git Pocket Guide")
-        .navigateToBookStore()
+            .deleteAllBooks()
+            .navigateToBookStore()
 
     });
 
     it('Add book to collection', () => {
-        booksPage.addBookToCollection("Git Pocket Guide").navigateToProfile()
+        booksPage
+            .addBookToCollection("Git Pocket Guide")
+            .navigateToProfile()
 
         profilePage.isCorrectBook("Git Pocket Guide")
     });

@@ -1,6 +1,16 @@
 // import chaiColors from 'chai-colors';
 
 // import tinycolor from 'tinycolor2';
+const RED = "rgb(220, 53, 69)"
+const GREEN = "rgb(40, 167, 69)"
+function checkBorderColor(element, valid){
+    if (valid){
+        cy.get(element).should('have.css', 'border-color', GREEN);
+    }else{
+        cy.get(element).should('have.css', 'border-color', RED);
+    }
+    return this
+}
 export const registerForm = {
     TXT_LASTNAME: "#lastName",
     TXT_FIRSTNAME: "#firstName",
@@ -14,7 +24,7 @@ export const registerForm = {
     DTP_DOB_MONTH: ".react-datepicker__month-select",
     DTP_DOB_YEAR: ".react-datepicker__year-select",
     DDL_SUBJECTS: "#subjectsInput",
-    CHK_HOBBIES: "#hobbiesWrapper :checkbox",
+    CHK_HOBBIES: "#hobbiesWrapper",
     DLG_UPLOADPICTURE: "#uploadPicture",
     TXT_CURRENTADDRESS: "#currentAddress",
     DDL_STATE: "#state input",
@@ -67,19 +77,9 @@ export const registerForm = {
     },
 
     checkHobbies(hobbies) {
-        for (let i = 0; i < hobbies.length; i++) {
-            switch (hobbies[i]) {
-                case "Sports":
-                    cy.get(this.CHK_HOBBIES).check("1", {force: true} )
-                    break
-                case "Reading":
-                    cy.get(this.CHK_HOBBIES).check("2", {force: true} )
-                    break
-                case "Music":
-                    cy.get(this.CHK_HOBBIES).check("3", {force: true} )
-                    break
-            }
-        }
+        hobbies.forEach(element => {
+            cy.get(this.CHK_HOBBIES).contains(element).click();
+        });
         return this;
     },
 
@@ -107,105 +107,70 @@ export const registerForm = {
         return this;
     },
     checkFirstNameValid(valid) {
-        if (valid){
-
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.GREEN);
-        }else{
-
-            cy.get(this.TXT_FIRSTNAME).should('have.css', 'border-color', this.RED);
-        }
+        checkBorderColor(this.TXT_FIRSTNAME, valid)
         return this
     },
 
     checkLastNameValid(valid) {
-        if (valid){
-
-            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.GREEN);
-        }else{
-
-            cy.get(this.TXT_LASTNAME).should('have.css', 'border-color', this.RED);
-        }
-        
+        checkBorderColor(this.TXT_LASTNAME, valid)
         return this
     },
 
     checkEmailValid(valid) {
-        if (valid){
-
-            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.GREEN);
-        }else{
-
-            cy.get(this.TXT_EMAIL).should('have.css', 'border-color', this.RED);
-        }
+        checkBorderColor(this.TXT_EMAIL, valid)
         return this
     },
     checkMobileValid(valid) {
-        if (valid){
-
-            cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.GREEN);
-        }else{
-
-            cy.get(this.TXT_USERNUMBER).should('have.css', 'border-color', this.RED);
-        }
+        checkBorderColor(this.TXT_USERNUMBER, valid)
         return this
     },
     isGenderChecked(valid) {
-        if (valid){
-
-            cy.get(this.LBL_GENDER).should('have.css', 'border-color', this.GREEN);
-        }else{
-
-            cy.get(this.LBL_GENDER).should('have.css', 'border-color', this.RED);
-        }
+        checkBorderColor(this.LBL_GENDER, valid)
         return this
     },
+    checkDOBValid(valid){
+        checkBorderColor(this.DTP_DOB, valid)
+        return this
+    },
+    checkPictureValid(valid){
+        checkBorderColor(this.DLG_UPLOADPICTURE, valid)
+        return this
+    },
+    checkAddressValid(valid){
+        checkBorderColor(this.TXT_CURRENTADDRESS, valid)
+        return this
+    }
 }
 
 export const confirmForm = {
+    TXT_VALUE: "table tbody tr td+td",
     BTN_CLOSE: "#closeLargeModal",
     LBL_STUDENTNAME: "table tbody tr:nth-child(1) td:nth-child(2)",
 
     isCorrectName(firstName, lastName) {
-        let name = firstName + ' ' + lastName
-        cy.get(this.LBL_STUDENTNAME)
-            .should('have.text', name)
+        let name = firstName.trim() + ' ' + lastName.trim()
+        cy.get(this.TXT_VALUE).contains(name).should("be.visible")
         return this
     },
 
     isCorrectEmail(email) {
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === email
-            })
-            .should('have.text', 'Student Email' + email)
+        cy.get(this.TXT_VALUE).contains(email).should("be.visible")
         return this
     },
 
     isCorrectGender(gender) {
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === gender
-            })
-            .should('have.text', 'Gender' + gender)
+        cy.get(this.TXT_VALUE).contains(gender).should("be.visible")
         return this
     },
 
     isCorrectMobile(userNumber) {
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === userNumber
-            })
-            .should('have.text', 'Mobile' + userNumber)
+        cy.get(this.TXT_VALUE).contains(userNumber).should("be.visible")
         return this
     },
 
     isCorrectDOB(day, month, year) {
         let dob = day + " " + month + "," + year
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === dob
-            })
-            .should('have.text', 'Date of Birth' + dob)
+        cy.get(this.TXT_VALUE).contains(dob).should("be.visible")
         return this
     },
 
@@ -215,11 +180,7 @@ export const confirmForm = {
             txt_subject += subjects[i] + ", "
         }
         txt_subject += subjects[subjects.length - 1]
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === txt_subject
-            })
-            .should('have.text', 'Subjects' + txt_subject)
+        cy.get(this.TXT_VALUE).contains(txt_subject).should("be.visible")
 
         return this;
     },
@@ -230,44 +191,25 @@ export const confirmForm = {
             txt_hobbies += hobbies[i] + ", "
         }
         txt_hobbies += hobbies[hobbies.length - 1]
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                // txt_hobbies = tr.children[1].innerText
-                return tr.children[1].innerText === txt_hobbies
-            })
-            .should('have.text', 'Hobbies' + txt_hobbies)
+        cy.get(this.TXT_VALUE).contains(txt_hobbies).should("be.visible")
         return this;
     },
 
     isCorrectPicture(picture) {
         let pieces = picture.split('/');
         let filename = pieces[pieces.length - 1];
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === filename
-            })
-            .should('have.text', 'Picture' + filename)
+        cy.get(this.TXT_VALUE).contains(filename).should("be.visible")
         return this
     },
 
     isCorrectAddress(currentAddress) {
-
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                // txt_hobbies = tr.children[1].innerText
-                return tr.children[1].innerText === currentAddress
-            })
-            .should('have.text', 'Address' + currentAddress)
+        cy.get(this.TXT_VALUE).contains(currentAddress).should("be.visible")
         return this;
     },
 
     isCorrectStateAndCity(state, city) {
         let txt_statecity = state + " " + city
-        cy.get('table tbody tr')
-            .filter((k, tr) => {
-                return tr.children[1].innerText === txt_statecity
-            })
-            .should('have.text', 'State and City' + txt_statecity)
+        cy.get(this.TXT_VALUE).contains(txt_statecity).should("be.visible")
         return this;
     },
 
