@@ -1,0 +1,71 @@
+{
+  "name": {
+    "valid": [
+      {
+        "firstName": "Vy",
+        "lastName": "Nguyen"
+      },
+      {
+        "firstName": "Vy           ",
+        "lastName": "          Nguyen  "
+      }
+    ],
+    "invalid": [
+      {
+        "firstName": "Vy@8",
+        "lastName": "Nguyen@8"
+      },
+      {
+        "firstName": "  ",
+        "lastName": "  "
+      }
+    ]
+  },
+  "email": {
+    "valid": [
+      "ngphvy01@gmail.com"
+    ],
+    "invalid": [
+      "ngphvy01@gmail@gmail.com",
+      "ngphvy01@gmail",
+      "ngphvy01@gmail....com",
+      "ngphvy  01@gmail",
+      "                 ngphvy01@gmail.com   "
+    ]
+  },
+  "gender": "Female",
+  "mobile": {
+    "valid": [
+      "0903960514"
+    ],
+    "invalid": [
+      "090abcdefg",
+      "09039  1=1",
+      "09039  514",
+      "+090396051"
+    ]
+  },
+  "day": "11",
+  "month": "October",
+  "year": "2023",
+  "subjects": [
+    "English",
+    "Chemistry"
+  ],
+  "hobbies": [
+    "Reading",
+    "Sports"
+  ],
+  "picture": {
+    "valid": [
+      "1.jpg",
+      "2.jpg"
+    ],
+    "invalid": [
+      "I.pdf"
+    ]
+  },
+  "currentAddress": "123 BVD",
+  "state": "NCR",
+  "city": "Delhi"
+}
