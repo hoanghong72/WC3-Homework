@@ -1,117 +1,71 @@
 {
-  "user": [
-    {
-      "firstName": "Vy",
-      "lastName": "Nguyen",
-      "email": "ngphvy01@gmail.com",
-      "gender": "Female",
-      "mobile": "0903960514",
-      "day": "11",
-      "month": "October",
-      "year": "2023",
-      "subjects": [
-        "English",
-        "Chemistry"
-      ],
-      "hobbies": [
-        "Reading",
-        "Sports"
-      ],
-      "picture": "1.jpg",
-      "currentAddress": "123 BVD",
-      "state": "NCR",
-      "city": "Delhi"
-    },
-    {
-      "firstName": "Vy",
-      "lastName": "Nguyen",
-      "email": "ngphvy01@gmail.com",
-      "gender": "Female",
-      "mobile": "0903960514",
-      "day": "11",
-      "month": "October",
-      "year": "2023",
-      "subjects": [
-        "English"
-      ],
-      "hobbies": [
-        "Reading"
-      ],
-      "picture": "2.jpg",
-      "currentAddress": "123 BVD",
-      "state": "NCR",
-      "city": "Delhi"
-    },
-    {
-      "firstName": "Vy           ",
-      "lastName": "          Nguyen  ",
-      "email": "ngphvy01@gmail.com",
-      "gender": "Female",
-      "mobile": "0903960514",
-      "day": "11",
-      "month": "October",
-      "year": "2023",
-      "subjects": [
-        "English"
-      ],
-      "hobbies": [
-        "Reading"
-      ],
-      "picture": "1.jpg",
-      "currentAddress": "123 BVD      ",
-      "state": "NCR",
-      "city": "Delhi"
-    },
-    {
-      "firstName": "Vy",
-      "lastName": "Nguyen",
-      "email": "ngphvy01@gmail@gmail.com",
-      "gender": "Female",
-      "mobile": "090abcdefg",
-      "day": "11",
-      "month": "October",
-      "year": "2023",
-      "picture": "I.pdf"
-    },
-    {
-      "firstName": "  ",
-      "lastName": "Nguyen",
-      "email": "ngphvy01@gmail",
-      "gender": "Female",
-      "mobile": "09039  1=1",
-      "day": "11",
-      "month": "October",
-      "year": "2023"
-    },
-    {
-      "firstName": "Vy",
-      "lastName": "Nguyen",
-      "email": "ngphvy01@gmail....com",
-      "gender": "Female",
-      "mobile": "09039  514",
-      "day": "11",
-      "month": "October",
-      "year": "2023"
-    },
-    {
-      "firstName": "Vy",
-      "lastName": "Nguyen@8",
-      "email": "ngphvy  01@gmail",
-      "gender": "Female",
-      "mobile": "+090396051",
-      "day": "11",
-      "month": "October",
-      "year": "2023"
-    },
-    {
-      "firstName": "Vy",
-      "lastName": "Nguyen",
-      "email": "                 ngphvy01@gmail.com   ",
-      "gender": "Female",
-      "mobile": "0903960514",
-      "day": "20",
-      "month": "October",
-      "year": "2024"
-    }
-  ]
+  "name": {
+    "valid": [
+      {
+        "firstName": "Vy",
+        "lastName": "Nguyen"
+      },
+      {
+        "firstName": "Vy           ",
+        "lastName": "          Nguyen  "
+      }
+    ],
+    "invalid": [
+      {
+        "firstName": "Vy@8",
+        "lastName": "Nguyen@8"
+      },
+      {
+        "firstName": "  ",
+        "lastName": "  "
+      }
+    ]
+  },
+  "email": {
+    "valid": [
+      "ngphvy01@gmail.com"
+    ],
+    "invalid": [
+      "ngphvy01@gmail@gmail.com",
+      "ngphvy01@gmail",
+      "ngphvy01@gmail....com",
+      "ngphvy  01@gmail",
+      "                 ngphvy01@gmail.com   "
+    ]
+  },
+  "gender": "Female",
+  "mobile": {
+    "valid": [
+      "0903960514"
+    ],
+    "invalid": [
+      "090abcdefg",
+      "09039  1=1",
+      "09039  514",
+      "+090396051"
+    ]
+  },
+  "day": "11",
+  "month": "October",
+  "year": "2023",
+  "subjects": [
+    "English",
+    "Chemistry"
+  ],
+  "hobbies": [
+    "Reading",
+    "Sports"
+  ],
+  "picture": {
+    "valid": [
+      "1.jpg",
+      "2.jpg"
+    ],
+    "invalid": [
+      "I.pdf"
+    ]
+  },
+  "currentAddress": "123 BVD",
+  "state": "NCR",
+  "city": "Delhi"
 }

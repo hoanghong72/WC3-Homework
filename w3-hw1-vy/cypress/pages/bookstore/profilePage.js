@@ -3,7 +3,8 @@ export const profilePage = {
     // BTN_SUBMIT: "#submit",
     // BTN_OK_DIALOG: "#closeSmallModal-ok",
     BTN_GO_TO_STORE: "#gotoStore",
-    TXT_BOOK_NAME_COL: ".rt-table .rt-tr-group .rt-td:nth-child(2) a",
+    //TXT_BOOK_NAME_COL: ".rt-table .rt-tr-group .rt-td:nth-child(2) a",
+    TXT_BOOK_NAME_COL: ".rt-table .rt-tr-group .rt-td+.rt-td a",
     TXT_CURRENT_PAGE: ".-pageJump input",
     TXT_TOTAL_PAGES: ".-totalPages",
     BTN_PAGE: ".-pagination button",
@@ -17,12 +18,15 @@ export const profilePage = {
         const stub = cy.stub()
         cy.on('window:alert', stub);
         cy.get('button').contains('Delete All Books').click({ force: true });
+        return this;
+    },
+    
+    clickOkButtonDeleteDialog(){
         cy.get('button').contains('OK').click({ force: true });
         cy.on("window:confirm", (txt) => {
             expect(["All Books deleted.", "No books available in your's collection!"]).to.include(txt);
             return true;
         });
-
         return this;
     },
 

@@ -2,7 +2,8 @@ export const bookstore = {
 
     // BOOK STORE PAGE
 
-    TXT_BOOK_NAME_COL: ".rt-table .rt-tr-group .rt-td:nth-child(2) a",
+    //TXT_BOOK_NAME_COL: ".rt-table .rt-tr-group .rt-td:nth-child(2) a",
+    TXT_BOOK_NAME_COL: ".rt-table .rt-tr-group .rt-td+.rt-td a",
     TXT_SEARCH_BOX: "#searchBox",
     TXT_CURRENT_PAGE: ".-pageJump input",
     TXT_TOTAL_PAGES: ".-totalPages",
@@ -59,11 +60,7 @@ export const bookstore = {
 
     clickAddBookToCollection() {
         cy.get('button').contains('Add To Your Collection').click({ force: true });
-        cy.on("window:confirm", (s) => {
-            expect(s).to.contains("Book added to your collection");
-            return true;
-
-        });
+        cy.acceptAlert("window:confirm", "Book added to your collection");
         return this;
     },
 }

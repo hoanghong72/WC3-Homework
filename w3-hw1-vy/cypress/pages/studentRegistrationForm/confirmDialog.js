@@ -1,44 +1,37 @@
 export const confirmDialog = {
-    TXT_NAME: "table >tbody >tr:nth-child(1) td:nth-child(2)",
-    TXT_EMAIL: "table >tbody >tr:nth-child(2) td:nth-child(2)",
-    TXT_GENDER: "table >tbody >tr:nth-child(3) td:nth-child(2)",
-    TXT_MOBILE: "table >tbody >tr:nth-child(4) td:nth-child(2)",
-    TXT_DOB: "table >tbody >tr:nth-child(5) td:nth-child(2)",
-    TXT_SUBJECT: "table >tbody >tr:nth-child(6) td:nth-child(2)",
-    TXT_HOBBIES: "table >tbody >tr:nth-child(7) td:nth-child(2)",
-    TXT_PICTURE: "table >tbody >tr:nth-child(8) td:nth-child(2)",
-    TXT_ADDRESS: "table >tbody >tr:nth-child(9) td:nth-child(2)",
-    TXT_STATE_AND_CITY: "table >tbody >tr:nth-child(10) td:nth-child(2)",
+    TXT_VALUE: "table tbody tr td+td",
 
     isNameCorrect(firstName, lastName) {
         firstName = firstName.trimStart().trimEnd();
         lastName = lastName.trimStart().trimEnd();
-        cy.get(this.TXT_NAME).should("have.text", firstName + " " + lastName);
+        let value = firstName + " " + lastName;
+        cy.get(this.TXT_VALUE).contains(value).should("be.visible");
         return this;
     },
 
     isEmailCorrect(email) {
-        cy.get(this.TXT_EMAIL).should("have.text", email);
+        cy.get(this.TXT_VALUE).contains(email).should("be.visible");
         return this;
     },
 
     isGenderCorrect(gender) {
-        cy.get(this.TXT_GENDER).should("have.text", gender);
+        cy.get(this.TXT_VALUE).contains(gender).should("be.visible");
         return this;
     },
 
     isMobileCorrect(mobile) {
-        cy.get(this.TXT_MOBILE).should("have.text", mobile);
+        cy.get(this.TXT_VALUE).contains(mobile).should("be.visible");
         return this;
     },
 
     isDOBCorrect(day, month, year) {
-        cy.get(this.TXT_DOB).should("have.text", day + " " + month + "," + year);
+        let value = day + " " + month + "," + year;
+        cy.get(this.TXT_VALUE).contains(value).should("be.visible");
         return this;
     },
 
     isPictureCorrect(picture) {
-        cy.get(this.TXT_PICTURE).should("have.text", picture);
+        cy.get(this.TXT_VALUE).contains(picture).should("be.visible");
         return this;
     },
 
@@ -48,7 +41,7 @@ export const confirmDialog = {
             subjects_a = subjects_a + ", " + subjects[i];
         };
         subjects_a = subjects_a.slice(2);
-        cy.get(this.TXT_SUBJECT).should("have.text", subjects_a);
+        cy.get(this.TXT_VALUE).contains(subjects_a).should("be.visible");
         return this;
     },
 
@@ -58,23 +51,24 @@ export const confirmDialog = {
             hobbies_a = hobbies_a + ", " + hobbies[i];
         };
         hobbies_a = hobbies_a.slice(2);
-        cy.get(this.TXT_HOBBIES).should("have.text", hobbies_a);
+        cy.get(this.TXT_VALUE).contains(hobbies_a).should("be.visible");
         return this;
     },
 
     isAddressCorrect(currentAddress) {
-        cy.get(this.TXT_ADDRESS).should("have.text", currentAddress);
+        cy.get(this.TXT_VALUE).contains(currentAddress).scrollIntoView().should("be.visible");
         return this;
     },
 
     isStateCorrect(state, city) {
         if (state != "" && city != "") {
-            cy.get(this.TXT_STATE_AND_CITY).should("have.text", state + " " + city);
+            let value = state + " " + city;
+            cy.get(this.TXT_VALUE).contains(value).should("be.visible");
         }
         else {
-            cy.get(this.TXT_STATE_AND_CITY).should("have.text", state + city);
+            let value = state + city;
+            cy.get(this.TXT_VALUE).contains(value).should("be.visible");
         };
         return this;
     },
-
 }
