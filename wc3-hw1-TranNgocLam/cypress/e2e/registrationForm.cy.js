@@ -2,6 +2,7 @@
 // import { it } from 'mocha';
 import { registerForm, confirmForm } from '../pages/registrationForm'
 describe('Registration Form', () => {
+
   beforeEach(() => {
     cy.fixture('registrationFormTestData.json').as('registration')
     cy.visit('/automation-practice-form')
@@ -89,26 +90,43 @@ describe('Registration Form', () => {
       .isGenderChecked(false)
       .checkMobileValid(false)
   });
+  const users = require('../fixtures/registrationFormTestData.json')
+
 
   /*  TCRegister#5: Verify that user cannot submit with invalid first name and last name:
-    - First name and Last name includes numbers and special characters.
-    - First name and Last name includes only a space character. */
-  it('TCRegister#5: Verify that user cannot submit with invalid first name and last name', () => {
-    cy.get('@registration').then((users) => {
-      // names = users[2].name
-      cy.get(users[2].name).each((username) => {
-        registerForm
-          .inputLastName(username.lastName)
-          .inputFirstName(username.firstName)
-          .checkGender(users[2].gender)
-          .inputUserNumber(users[2].userNumber)
-          .clickSubmit()
-          .checkFirstNameValid(false) //Validate the input
-          .checkLastNameValid(false)
-      });
-
+  - First name and Last name includes numbers and special characters.
+  - First name and Last name includes only a space character. */
+  const invalidName = users[2].name
+  invalidName.forEach(username => {
+    it('TCRegister#5: Verify that user cannot submit with invalid first name and last name' + JSON.stringify(username), () => {
+      registerForm
+        .inputLastName(username.lastName)
+        .inputFirstName(username.firstName)
+        .checkGender(users[2].gender)
+        .inputUserNumber(users[2].userNumber)
+        .clickSubmit()
+        .checkFirstNameValid(false) //Validate the input
+        .checkLastNameValid(false)
     });
-  });
+  })
+
+
+  // it('TCRegister#5: Verify that user cannot submit with invalid first name and last name', () => {
+  //   cy.get('@registration').then((users) => {
+  //     // names = users[2].name
+  //     cy.get(users[2].name).each((username) => {
+  //       registerForm
+  //         .inputLastName(username.lastName)
+  //         .inputFirstName(username.firstName)
+  //         .checkGender(users[2].gender)
+  //         .inputUserNumber(users[2].userNumber)
+  //         .clickSubmit()
+  //         .checkFirstNameValid(false) //Validate the input
+  //         .checkLastNameValid(false)
+  //     });
+
+  //   });
+  // });
 
   /*  TCRegister#6: Verify that user cannot submit with invalid data:
   - Date of birth is selected by a day after today.
@@ -133,37 +151,6 @@ describe('Registration Form', () => {
     });
   });
 
-  /*  TCRegister#7: Verify that user cannot submit with invalid email and phone number:
-    - Email lacks of '@' and email domain; Phone number includes characters.
-    - Email lacks of email domain; Phone numbers begin with a phone code instead of 0.
-    - Email's domain lacks of ".com"; Phone numbers begin with a number other than 0.
-    - Email's domain includes multiple dots; Phone number has less than 10 digits.
-*/
-  /*   it('TCRegister#7: Verify that user cannot submit with invalid email phone number', () => {
-      cy.get('@registration').then((users) => {
-        cy.get(users[4].invalidEmailAndNumber).each((invalidData) => {
-          registerForm
-            .inputLastName(users[4].lastName)
-            .inputFirstName(users[4].firstName)
-            .inputEmail(invalidData.email)
-            .checkGender(users[4].gender)
-            .inputUserNumber(invalidData.userNumber)
-            .clickSubmit()
-  
-          registerForm
-            .checkFirstNameValid(true)
-            .checkLastNameValid(true)
-            .checkEmailValid(false)
-            .isGenderChecked(true)
-            .checkMobileValid(false)
-          cy.reload()
-  
-        })
-  
-      });
-    }); */
-
-  const users = require('../fixtures/registrationFormTestData.json')
   const invalidData = users[4].invalidEmailAndNumber
   invalidData.forEach(data => {
     it('TCRegister#7: Verify that user cannot submit with invalid email and invalid phone number: ' + JSON.stringify(data), () => {
