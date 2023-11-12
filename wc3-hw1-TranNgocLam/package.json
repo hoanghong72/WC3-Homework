@@ -1,0 +1,17 @@
+{
+  "name": "wc3-hw1-tranngoclam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai-colors": "^1.0.1",
+    "cypress": "^13.3.2",
+    "tinycolor": "^0.0.1"
+  }
+}
